@@ -1,1 +1,1 @@
-Project1: Create basic page
+Project1: Create basic webpage
