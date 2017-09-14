@@ -4,10 +4,7 @@
 
 <h1 id="title">swalde3 IT202</h1>
 <p><br>My folders:</p>
-<?php
-$d = dir(".");
-echo "Path: " . $d->path . "\n";
-echo "<ul>";
+<?php $d = dir("."); echo "Path: " . $d->path . "\n"; echo "<ul>";
 while (false !== ($entry = $d->read())) {
    echo "<li><a href='{$entry}'>{$entry}</a></li>";
 }
@@ -17,5 +14,5 @@ $d->close();
 
 echo '<br /><br /><a href="..">Return</a>'; 
     closedir($handle); 
-} 
+ 
 ?>  
