@@ -4,15 +4,16 @@
 
 <h1 id="title">swalde3 IT202</h1>
 <p><br>My folders:</p>
-<?php $d = dir("."); echo "Path: " . $d->path . "\n"; echo "<ul>";
-while (false !== ($entry = $d->read())) {
-   echo "<li><a href='{$entry}'>{$entry}</a></li>";
-}
-echo "</ul>";
 
-$d->close();
-
+<p><?php 
+$count = 0; 
+if ($handle = opendir('.')) { 
+    while (false !== ($file = readdir($handle))) { 
+        if ($file != "." && $file != "..") {$count++; 
+            print("<a href=\"".$file."\">".$file."</a><br />\n"); 
+        } 
+    } 
 echo '<br /><br /><a href="..">Return</a>'; 
     closedir($handle); 
- 
-?>  
+} 
+?></p>
