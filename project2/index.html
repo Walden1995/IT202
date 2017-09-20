@@ -451,10 +451,11 @@
 <div id="map" style="height:400px;width:100%"></div>
     <script>
       function initMap() {
-        var uluru = {lat: 41.878114, lng:-87.629798};
+        var uluru = {lat: 41.866395, lng:-87.6482613};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
+          zoom: 10,
+          center: uluru,
+          mapTypeId: 'satellite'
         });
         var marker = new google.maps.Marker({
           position: uluru,
