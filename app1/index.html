@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+
+    <title>Walden1995/IT202</title>
+    <link rel="icon" href = "https://github.com/fluidicon.png"/>
+    
+    <!-- Custom styles for this template -->
+   <!-- <link href="https://Walden1995.github.io/css/agency.css" rel="stylesheet">-->
+    
+  <style>
+   .nodisp{
+     display:none;
+  }
+    .completed{
+      background-color: lightgreen;
+    }
+    .open{
+      background-color: red;
+    }
+  </style>
+  </head>
+  <body>
+    <h1>311 Grafitti Requests</h1>
+    <div id="template" class="panel panel-default nodisp">
+      <div id="title" class="panel-heading">Panel Header</div>
+      <div class = "panel-body">
+        <p id="content">Panel Content</p>
+        <p id="content2">Panel Content</p>
+      </div>
+    </div>
+        
+    <script>
+      $.get("https://data.cityofchicago.org/resource/cdmx-wzbz.json?$limit=100",function(response){
+          $.each(response , function(index,value,parsed){
+             console.log(this);
+             var node = $("#template").clone();
+             node.find("#title").text(this.service_request_number);
+             if(this.status == "Completed"){
+               node.find("#title").attr("class","completed");
+             }
+             node.find("#content").text(this.street_address);
+             node.find("#content2").text(this.status);
+             node.removeClass("nodisp");
+             
+             $("body").append(node);
+          });
+      });
+    
+    </script>
+  </body>
+  
+
+</html>
