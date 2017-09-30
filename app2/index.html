@@ -32,46 +32,11 @@
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 10,
           center: uluru
-          
         });
         
-      $.get("https://data.cityofchicago.org/resource/cdmx-wzbz.json?$limit=100",function(response){
-        console.log(response);
-        plotdata(response,map);
-      });
-
-        var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-            '<div id="bodyContent">'+
-            '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-            'sandstone rock formation in the southern part of the '+
-            'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-            'south west of the nearest large town, Alice Springs; 450&#160;km '+
-            '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-            'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-            'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-            'Aboriginal people of the area. It has many springs, waterholes, '+
-            'rock caves and ancient paintings. Uluru is listed as a World '+
-            'Heritage Site.</p>'+
-            '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-            'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-            '(last visited June 22, 2009).</p>'+
-            '</div>'+
-            '</div>';
-
-        var infowindow = new google.maps.InfoWindow({
-          content: contentString
-        });
-
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map,
-          title: 'Uluru (Ayers Rock)'
-        });
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
+        $.get("https://data.cityofchicago.org/resource/cdmx-wzbz.json?$limit=999",function(response){
+          console.log(response);
+          plotdata(response,map);
         });
       }
      
@@ -80,13 +45,33 @@
         $.each(datatoplot,function(index,curr){
           var newpos = {lat: curr.location.coordinates[1], lng: curr.location.coordinates[0]};
           
-          var marker2 = new google.maps.Marker({
+           var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">'+this.service_request_number+'</h1>'+
+            '<div id="bodyContent">'+
+            '<p><b>'+this.type_of_service_request +'</b> on'+this.what_type_of_surface_is_the_graffiti_on_ +
+            '@ '+this.street_address+'</p>'+
+            '<p>Service is'+ this.status +
+            '</p>'+
+            '</div>'+
+            '</div>';
+          
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          
+          
+          var marker = new google.maps.Marker({
             position: newpos,
             map: gmap,
-            title: 'error'
+            title: this.service_request_number
           });
-          console.log(index);
           
+          marker.addListener('click', function() {
+            infowindow.open(gmap, marker);
+          });
+
         });
         
       }
