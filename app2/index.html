@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Info windows</title>
@@ -26,11 +28,17 @@
       // When the user clicks the marker, an info window opens.
 
       function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
+        var uluru = {lat: 41.8781, lng: -87.6298};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
+          zoom: 10,
           center: uluru
+          
         });
+        
+      $.get("https://data.cityofchicago.org/resource/cdmx-wzbz.json?$limit=100",function(response){
+        console.log(response);
+        plotdata(response,map);
+      });
 
         var contentString = '<div id="content">'+
             '<div id="siteNotice">'+
@@ -66,6 +74,23 @@
           infowindow.open(map, marker);
         });
       }
+     
+      
+      function plotdata(datatoplot,gmap){
+        $.each(datatoplot,function(index,curr){
+          var newpos = {lat: curr.location.coordinates[1], lng: curr.location.coordinates[0]};
+          
+          var marker2 = new google.maps.Marker({
+            position: newpos,
+            map: gmap,
+            title: 'error'
+          });
+          console.log(index);
+          
+        });
+        
+      }
+    
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDF8nkorKQLn7OmJLuSIsMItMTJBCT5WUY&callback=initMap">
