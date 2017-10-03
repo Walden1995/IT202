@@ -20,12 +20,26 @@
       }
     </style>
   </head>
+
   <body>
+    <div class = "panel panel-default">
+      <input type="text" id ="zip" placeholder="Chicago Zip"></input>
+      <button id = "submit">submit</button>
+    </div>
+    
+
     <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDF8nkorKQLn7OmJLuSIsMItMTJBCT5WUY"></script>
     <script>
 
       // This example displays a marker at the center of Australia.
       // When the user clicks the marker, an info window opens.
+      
+      var zips;
+      $.get("https://data.cityofchicago.org/resource/unjd-c2ca.json",function(response){
+        zips = response;
+      });
+      
 
       function initMap() {
         var uluru = {lat: 41.8781, lng: -87.6298};
@@ -34,12 +48,25 @@
           center: uluru
         });
         
-        $.get("https://data.cityofchicago.org/resource/cdmx-wzbz.json?$limit=999",function(response){
-          console.log(response);
-          plotdata(response,map);
+        
+        var didindex = 0;
+        $.each(zips,function(index,curr){
+          if(curr.zip === $("#zip").val()){
+            didindex = 1;
+            console.log("Valid Zip");
+            $.get("https://data.cityofchicago.org/resource/cdmx-wzbz.json?zip_code=" + $("#zip").val() ,function(response){
+              plotdata(response,map);
+           });
+          }
         });
+        
+        if(didindex === 0){
+          console.log("Invalid Zip");
+            alert("Zipcode Not from Chicago");
+          });
+        }
       }
-     
+      
       
       function plotdata(datatoplot,gmap){
         $.each(datatoplot,function(index,curr){
@@ -77,8 +104,9 @@
       }
     
     </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDF8nkorKQLn7OmJLuSIsMItMTJBCT5WUY&callback=initMap">
+
+    <script>
+          $("#submit").on("click",initMap);
     </script>
   </body>
 </html>
