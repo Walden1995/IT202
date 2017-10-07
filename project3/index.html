@@ -7,13 +7,12 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>Jumbotron Template for Bootstrap</title>
+    <title>swalde3 project3</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap4.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="jumbotron.css" rel="stylesheet">
+    <link rel="stylesheet" href="tab.css">
   </head>
 
   <body>
@@ -50,51 +49,75 @@
         </form>
       </div>
     </nav>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-3">Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-      </div>
+    
+    <div class="tab">
+      <button id="InputBtn" class="tablinks" onclick="openTab(event, 'Input')">Input</button>
+      <button class="tablinks" onclick="openTab(event, 'Text')">Text</button>
+      <button class="tablinks" onclick="openTab(event, 'Map')">Map</button>
     </div>
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-        </div>
-      </div>
+    <div id="Input" class="tabcontent">
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+          <div class="container row">
+            <h1 class="display-3 col-md-12">Chicago Food Inspection Search</h1>
+            <h4>Inspection Date</h4>
+            <input id="date" class="form-control mr-sm-2" type="text" placeholder="yyyy-mm-dd" aria-label="Search"/>
+            <h4>Facility Type</h4>
+            <select size="1" class="form-control mr-sm-2" autocomplete="off" id="types" aria-label="Search">
+                <option value="#"></option>
+            </select>
+            
+            <h4>Inspection Result</h4>
+            <select size="1" class="form-control mr-sm-2" autocomplete="off" id="results" aria-label="Search">
+                <option value="#"></option>
+            </select>
+            <h4>Zip Code</h4>
+            <input id="zip" class="form-control mr-sm-2" type="text" placeholder="Zip Code" aria-label="Search">
 
-      <hr>
+          </div>
+          <div style="padding-top:50px">
+            <h4 class="btn btn-primary btn-md" style="cursor:pointer" onclick="submit()">Search &raquo;</h4>
+          </div>
+        </div>    
+    </div>
+      
+    <div id="Text" class="tabcontent">
+      <div class="jumbotron">
+        <div id="textout">
 
+        </div>
+      </div>   
+    </div>
+      
+    <div id="Map" class="tabcontent">
+      <div class="jumbotron">
+        <div class="container row">
+          <div></div>
+          
+        </div>
+      </div>   
+    </div>
+
+    <div class="jumbotron">
+    <div id="map"></div>
+    </div>
       <footer>
         <p>&copy; Company 2017</p>
       </footer>
-    </div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="popper.min.js"></script>
     <script src="bootstrap4.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="ie10-viewport-bug-workaround.js"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAep9hbqZs01I_nfV20p-5EIRQNXOH6tws"></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZjqRljGVmVZR4v8HBQwh6rBr1waUkcr4"></script>
+    <script src="input.js"></script>
+    <script src="map.js"></script>
   </body>
 </html>
