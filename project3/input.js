@@ -44,7 +44,6 @@ $(document).ready( function(){
   getResults();
   document.getElementById("InputBtn").className += " active";
   document.getElementById("Input").style.display = "block";
-  initMap("");
 });
 
 function submit(){

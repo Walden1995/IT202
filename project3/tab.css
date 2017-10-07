@@ -1,4 +1,9 @@
 /* Style the tab */
+#Map{
+  height: 500px;
+  width:100%
+}
+
 div.tab {
   overflow: hidden;
   border: 1px solid #ccc;
