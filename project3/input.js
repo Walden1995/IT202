@@ -33,6 +33,7 @@ function getTypes(){
 }
 
 function submit(){
+  $('#Numcount').text("");
   var zip = $('#zip').val();
   var date = $('#date').val();
   var type = $('#types  :selected').text();
