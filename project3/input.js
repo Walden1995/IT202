@@ -32,25 +32,15 @@ function getTypes(){
   });
 }
 
-$(document).ready( function(){
-  $.get("https://data.cityofchicago.org/resource/unjd-c2ca.json?$query=%20select%20zip%20group%20by%20zip",function(response){
-    $.each(response,function(ix,cu){
-      zips.push(cu.zip);
-    });
-    console.log(zips);
-  });
-
-  getTypes();
-  getResults();
-  document.getElementById("InputBtn").className += " active";
-  document.getElementById("Input").style.display = "block";
-});
-
 function submit(){
   var zip = $('#zip').val();
   var date = $('#date').val();
   var type = $('#types  :selected').text();
   var result = $('#results  :selected').text();
+  $(".tabcontent").hide();
+  $(".tablinks").removeClass("active");
+  $("#MapBtn").addClass("active");
+  $("#Map").show();
   var query = "https://data.cityofchicago.org/resource/cwig-ma7x.json?";
   var istrue = 0;
   if(zip != ""){
@@ -99,13 +89,9 @@ function submit(){
 function openTab(evt, tabName) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(tabName).style.display = "block";
+  $(".tabcontent").hide();
+  $(".tablinks").removeClass("active");
+
+  $('#' + tabName).show();
   evt.currentTarget.className += " active";
 }

@@ -51,9 +51,9 @@
     </nav>
     
     <div class="tab">
-      <button id="InputBtn" class="tablinks" onclick="openTab(event, 'Input')">Input</button>
-      <button class="tablinks" onclick="openTab(event, 'Text')">Text</button>
-      <button class="tablinks" onclick="openTab(event, 'Map')">Map</button>
+      <button id="InputBtn" class="tablinks active" onclick="openTab(event, 'Input')">Input</button>
+      <button id="TextBtn" class="tablinks" onclick="openTab(event, 'Text')">Text</button>
+      <button id="MapBtn" class="tablinks" onclick="openTab(event, 'Map')">Map</button>
     </div>
 
     <div id="Input" class="tabcontent">
@@ -114,6 +114,28 @@
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAep9hbqZs01I_nfV20p-5EIRQNXOH6tws"></script> -->
     <script src="input.js"></script>
     <script src="map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZjqRljGVmVZR4v8HBQwh6rBr1waUkcr4&callback=initmap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZjqRljGVmVZR4v8HBQwh6rBr1waUkcr4"></script>
+    
+    <script type="text/javascript">
+      function initmap() {
+        console.log("map");
+        var uluru = {lat: 41.8781, lng: -87.6298};
+        var map = new google.maps.Map(document.getElementById('Map'), {
+          zoom: 5,
+          center: uluru
+        });
+      }
+      $(document).ready( function(){
+        $.get("https://data.cityofchicago.org/resource/unjd-c2ca.json?$query=%20select%20zip%20group%20by%20zip",function(response){
+          $.each(response,function(ix,cu){
+            zips.push(cu.zip);
+          });
+        });
+      
+        getTypes();
+        getResults();
+        $("#Input").show();
+      });
+    </script>
   </body>
 </html>

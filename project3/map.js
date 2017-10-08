@@ -9,7 +9,7 @@ function initMap(input) {
   console.log("map");
   var uluru = {lat: 41.8781, lng: -87.6298};
   var map = new google.maps.Map(document.getElementById('Map'), {
-    zoom: 5,
+    zoom: 10,
     center: uluru
   });
   
@@ -20,16 +20,6 @@ function initMap(input) {
     });
   }
 }
-
-function initmap() {
-  console.log("map");
-  var uluru = {lat: 41.8781, lng: -87.6298};
-  var map = new google.maps.Map(document.getElementById('Map'), {
-    zoom: 5,
-    center: uluru
-  });
-}
-
 
 function plotdata(datatoplot,gmap){
   $.each(datatoplot,function(index,curr){

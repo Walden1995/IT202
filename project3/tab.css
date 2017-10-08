@@ -39,3 +39,11 @@ div.tab button.active {
   border: 1px solid #ccc;
   border-top: none;
 }
+
+.tabactive{
+  display: block
+}
+
+.tabinactive{
+  display: none
+}
