@@ -1,6 +1,6 @@
 /* Style the tab */
 #Map{
-  height: 500px;
+  height: calc(100% - 3.5rem);
   width:100%
 }
 
@@ -36,8 +36,10 @@ div.tab button.active {
 .tabcontent {
   display: none;
   padding: 6px 12px;
+  height: calc(100% - 3.5rem);
   border: 1px solid #ccc;
   border-top: none;
+  border-bottom: none;
 }
 
 .tabactive{

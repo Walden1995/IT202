@@ -12,6 +12,7 @@
     <!-- Bootstrap core CSS -->
     <link href="bootstrap4.min.css" rel="stylesheet">
     <link href="jumbotron.css" rel="stylesheet">
+    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="tab.css">
   </head>
 
@@ -43,10 +44,6 @@
             </div>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
       </div>
     </nav>
     
@@ -54,6 +51,7 @@
       <button id="InputBtn" class="tablinks active" onclick="openTab(event, 'Input')">Input</button>
       <button id="TextBtn" class="tablinks" onclick="openTab(event, 'Text')">Text</button>
       <button id="MapBtn" class="tablinks" onclick="openTab(event, 'Map')">Map</button>
+      <button id="Numcount" class="tablinks"></button>
     </div>
 
     <div id="Input" class="tabcontent">
@@ -77,31 +75,33 @@
 
           </div>
           <div style="padding-top:50px">
-            <h4 class="btn btn-primary btn-md" style="cursor:pointer" onclick="submit()">Search &raquo;</h4>
+            <h4 class="btn btn-primary btn-md" style="cursor:pointer" onclick="submit()">Search <i class="fa fa-search" aria-hidden="true"></i></h4>
           </div>
         </div>    
     </div>
       
     <div id="Text" class="tabcontent">
       <div class="jumbotron">
-        <div id="textout">
-
+        <div id="textout" class="row">
+         
         </div>
       </div>   
     </div>
       
+    <div id="sample" class="card tabinactive col-sm-3 col-md-3">
+        <div id="title" class="card-header"></div>
+        <div class="card-block">
+          <h4 id="name"></h4>
+          <p id="cardinfo"></p>
+          <p id="status"></p>
+        </div>
+    </div>
+
     <div id="Map" class="tabcontent">
-      <div class="jumbotron">
-        <div class="container row"></div>
-        
+      <div class="jumbotron" style="height:100%">
         <div id="map"></div>
       </div>   
     </div>
-
-      <footer>
-        <p>&copy; Company 2017</p>
-      </footer>
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -117,14 +117,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZjqRljGVmVZR4v8HBQwh6rBr1waUkcr4"></script>
     
     <script type="text/javascript">
-      function initmap() {
-        console.log("map");
-        var uluru = {lat: 41.8781, lng: -87.6298};
-        var map = new google.maps.Map(document.getElementById('Map'), {
-          zoom: 5,
-          center: uluru
-        });
-      }
       $(document).ready( function(){
         $.get("https://data.cityofchicago.org/resource/unjd-c2ca.json?$query=%20select%20zip%20group%20by%20zip",function(response){
           $.each(response,function(ix,cu){

@@ -14,15 +14,15 @@ function getTypes(){
     $.each(callback,function(i,ucurr){
       var istrue = 0;
       if(ucurr.facility_type){
-        var currstring = ucurr.facility_type.toUpperCase();
+        var currstring = ucurr.facility_type;
         $.each(types,function(c,tcurr){
-          if(tcurr === currstring){
+          if(tcurr === currstring.toUpperCase()){
             istrue = 1;
           }
         });
 
         if(!istrue){
-          types.push(currstring);
+          types.push(currstring.toUpperCase());
         }
       }
     });
@@ -47,14 +47,12 @@ function submit(){
     $.each(zips,function(indx,curr){
       if(zip === curr){
         istrue = 1;
-        console.log(curr);
       }
     });
   }
 
   if((istrue === 1) || (date != "") || (type != "") || (result != "")){
     query = query+"$query=select * where ";
-    console.log("activated?");
   }
 
   if(istrue === 0 && zip !=""){
@@ -73,7 +71,7 @@ function submit(){
   }
 
   if(type != ""){
-    query = query + "UPPER(inspection_type)='" + type + "'";
+    query = query + "upper(facility_type)='" + type + "'";
     if(result != ""){
         query = query + " AND ";
     }
@@ -82,7 +80,6 @@ function submit(){
   if(result != ""){
     query = query + "results='"+result+"'";
   }
-  
   getdata(query);
 }
 
