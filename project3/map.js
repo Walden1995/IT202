@@ -21,6 +21,7 @@ function plotdata(datatoplot,gmap){
   $("#textout").empty();
   var div = $("#textout");
   var i = 0;
+
   $.each(datatoplot,function(index,curr){
     i++;
     var card = $("#sample").clone();
