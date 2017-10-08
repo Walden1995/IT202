@@ -42,7 +42,7 @@ function submit(){
   $(".tablinks").removeClass("active");
   $("#MapBtn").addClass("active");
   $("#Map").show();
-  var query = "https://data.cityofchicago.org/resource/cwig-ma7x.json?";
+  query = "https://data.cityofchicago.org/resource/cwig-ma7x.json?";
   var istrue = 0;
   if(zip != ""){
     $.each(zips,function(indx,curr){
