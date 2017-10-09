@@ -30,13 +30,13 @@
             <a class="nav-link" href="../">IT202</a>
           </li>
           <li class="nav-item">
-            <p id="Screen1Btn" class="tablinks active" onclick="openTab(event, 'Screen1')">Screen1</p>
+              <a id="Screen1Btn" class="nav-link" onclick="openTab(event, 'Screen1')">Screen1</a>
           </li>
           <li class="nav-item">
-              <p id="Screen2Btn" class="tablinks active" onclick="openTab(event, 'Screen2')">Screen2</p>
+              <a id="Screen2Btn" class="nav-link" onclick="openTab(event, 'Screen2')">Screen2</a>
           </li>
           <li class="nav-item">
-              <p id="Screen3Btn" class="tablinks active" onclick="openTab(event, 'Screen3')">Screen3</p>
+              <a id="Screen3Btn" class="nav-link" onclick="openTab(event, 'Screen3')">Screen3</a>
           </li>
 
           <li class="nav-item dropdown">
@@ -73,20 +73,21 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="jquery.min.js"></script>
     <script src="popper.min.js"></script>
     <script src="bootstrap4.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="ie10-viewport-bug-workaround.js"></script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAep9hbqZs01I_nfV20p-5EIRQNXOH6tws"></script> -->
-    <script src="input.js"></script>
-    <script src="map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZjqRljGVmVZR4v8HBQwh6rBr1waUkcr4"></script>
     
     <script type="text/javascript">
       $(document).ready( function(){
           $("#Screen1").show();
       });
+
+      function openTab(evt, tabName) {
+        $(".tabcontent").hide();
+        $('#' + tabName).show();
+      }
     </script>
   </body>
 </html>
