@@ -11,7 +11,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap4.min.css" rel="stylesheet">
-    <link href="jumbotron.css" rel="stylesheet">
     <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="tab.css">
   </head>
@@ -44,18 +43,15 @@
       </div>
     </nav>
     
-    <div ="jumbotron">
-      <div class="tab">
-        <button id="InputBtn" class="tablinks active" onclick="openTab(event, 'Input')">Input</button>
-        <button id="TextBtn" class="tablinks" onclick="openTab(event, 'Text')">Text</button>
-        <button id="MapBtn" class="tablinks" onclick="openTab(event, 'Map')">Map</button>
-        <button id="Numcount" class="tablinks" onclick="querySee()"></button>
-      </div>
+    <div class="tab">
+      <button id="InputBtn" class="tablinks active" onclick="openTab(event, 'Input')">Input</button>
+      <button id="TextBtn" class="tablinks" onclick="openTab(event, 'Text')">Text</button>
+      <button id="MapBtn" class="tablinks" onclick="openTab(event, 'Map')">Map</button>
+      <button id="Numcount" class="tablinks" onclick="querySee()"></button>
     </div>
 
     <div id="Input" class="tabcontent">
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-        <h4>Chicago Food Inspection Search</h4>
+        <h3>Chicago Food Inspection Search</h3>
         <h5>Inspection Date</h5>
         <input id="date" class="form-control mr-sm-2" type="text" placeholder="yyyy-mm-dd" aria-label="Search"/>
         <h5>Facility Type</h5>
