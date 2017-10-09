@@ -1,6 +1,5 @@
 /* Style the tab */
 
-
 #Map{
   height: calc(100% - 3.5rem);
   width:100%
@@ -40,7 +39,6 @@ div.tab button.active {
   padding: 6px 12px;
   height: calc(100% - 3.5rem);
   border: 1px solid #ccc;
-  background: linear-gradient(0deg, white, #ccc 80%) no-repeat;
   border-top: none;
   border-bottom: none;
 }
