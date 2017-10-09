@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href = "https://github.com/fluidicon.png">
+
+    <title>swalde3 project3</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap4.min.css" rel="stylesheet">
+    <link href="jumbotron.css" rel="stylesheet">
+    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="tab.css">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">Chicago Food Inspection Search</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../">IT202</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://Walden1995.github.io/">Walden1995</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" target="_blank" href="https://data.cityofchicago.org/Health-Human-Services/Food-Inspections/4ijn-s7e5">API Endpoint</a>
+              <a class="dropdown-item" target="_blank" href="https://github.com/IT202/project3">Project Prompt</a>
+              <a class="dropdown-item" target="_blank" href="https://github.com/Walden1995/IT202">Repository Link</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    
+    <div class="tab">
+      <button id="InputBtn" class="tablinks active" onclick="openTab(event, 'Input')">Input</button>
+      <button id="TextBtn" class="tablinks" onclick="openTab(event, 'Text')">Text</button>
+      <button id="MapBtn" class="tablinks" onclick="openTab(event, 'Map')">Map</button>
+      <button id="Numcount" class="tablinks" onclick="querySee()"></button>
+    </div>
+
+    <div id="Input" class="tabcontent">
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="container text-left">
+        <h1 class="display-3">Chicago Food Inspection Search</h1>
+        <h4>Inspection Date</h4>
+        <input id="date" class="inputcontrol form-control" type="text" placeholder="yyyy-mm-dd" aria-label="Search"/>
+        <h4>Facility Type</h4>
+        <select size="1" class="inputcontrol form-control" autocomplete="off" id="types" aria-label="Search">
+            <option value="#"></option>
+        </select>
+        
+        <h4>Inspection Result</h4>
+        <select size="1" class="inputcontrol form-control" autocomplete="off" id="results" aria-label="Search">
+            <option value="#"></option>
+        </select>
+        <h4>Zip Code</h4>
+        <input id="zip" class="inputcontrol form-control" type="text" placeholder="Zip Code" aria-label="Search">
+        <div style="padding-top:50px">
+          <h4 class="btn btn-primary btn-md" style="cursor:pointer" onclick="submit()">Search <i class="fa fa-search" aria-hidden="true"></i></h4>
+        </div>
+      </div>
+    </div>
+      
+    <div id="Text" class="tabcontent">
+      <div class="container-fluid">
+        <div id="textout" class="row">
+        </div>
+      </div>   
+    </div>
+      
+    <div id="sample" class="card tabinactive mb-3 col-xs-3 col-sm-3">
+        <div id="title" style="height:5px;width:100%"></div>
+        <div id="block" class="card-block">
+          <h4 id="name"></h4>
+          <p id="cardinfo"></p>
+          <p id="status"></p>
+        </div>
+    </div>
+
+
+    <div id="Map" class="tabcontent">
+      <div style="height:100%">
+        <div id="map"></div>
+      </div>   
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="popper.min.js"></script>
+    <script src="bootstrap4.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="ie10-viewport-bug-workaround.js"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAep9hbqZs01I_nfV20p-5EIRQNXOH6tws"></script> -->
+    <script src="input.js"></script>
+    <script src="map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZjqRljGVmVZR4v8HBQwh6rBr1waUkcr4"></script>
+    
+    <script type="text/javascript">
+      var query;
+      $(document).ready( function(){
+        $.get("https://data.cityofchicago.org/resource/unjd-c2ca.json?$query=%20select%20zip%20group%20by%20zip",function(response){
+          $.each(response,function(ix,cu){
+            zips.push(cu.zip);
+          });
+        });
+      
+        getTypes();
+        getResults();
+        $("#Input").show();
+      });
+
+      function querySee(){
+        if(query != null){
+          alert("'" + query + "'" + " was sent to api endpoint");
+        }
+      }
+    </script>
+  </body>
+</html>
