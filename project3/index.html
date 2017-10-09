@@ -19,7 +19,7 @@
   <body>
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">Food Inspection Search</a>
+      <a class="navbar-brand" href="#">Project 3</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -53,29 +53,28 @@
 
     <div id="Input" class="tabcontent">
       <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h4>Inspection Date</h4>
+        <h3>Chicago Food Inspection Search</h3>
+        <h5>Inspection Date</h5>
         <input id="date" class="form-control mr-sm-2" type="text" placeholder="yyyy-mm-dd" aria-label="Search"/>
-        <h4>Facility Type</h4>
+        <h5>Facility Type</h5>
         <select size="1" class="form-control mr-sm-2" autocomplete="off" id="types" aria-label="Search">
             <option value="#"></option>
         </select>
         
-        <h4>Inspection Result</h4>
+        <h5>Inspection Result</h5>
         <select size="1" class="form-control mr-sm-2" autocomplete="off" id="results" aria-label="Search">
             <option value="#"></option>
         </select>
-        <h4>Zip Code</h4>
+        <h5>Zip Code</h5>
         <input id="zip" class="form-control mr-sm-2" type="text" placeholder="Chicago Zip Code" aria-label="Search">
 
-        <div style="padding-top:50px">
+        <div style="padding-top:2em">
           <h4 class="btn btn-primary btn-md" style="cursor:pointer" onclick="submit()">Search <i class="fa fa-search" aria-hidden="true"></i></h4>
         </div>
-      </div>    
     </div>
       
     <div id="Text" class="tabcontent">
-      <div class="jumbotron container-fluid">
+      <div class="container-fluid">
         <div id="textout" class="row">
         </div>
       </div>   
@@ -92,7 +91,7 @@
 
 
     <div id="Map" class="tabcontent">
-      <div class="jumbotron" style="height:100%">
+      <div style="height:100%">
         <div id="map"></div>
       </div>   
     </div>
