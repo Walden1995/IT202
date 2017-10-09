@@ -4,5 +4,6 @@ body {
 }
 
 body,html {
+  background: linear-gradient(to top, white, #ccc) fixed;
   height: 100%
 }
