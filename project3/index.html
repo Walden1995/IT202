@@ -53,15 +53,25 @@
 
     <div id="Input" class="tabcontent">
       <!-- Main jumbotron for a primary marketing message or call to action -->
+<<<<<<< HEAD
       <div class="jumbotron">
         <h4>Inspection Date</h4>
         <input id="date" class="form-control mr-sm-2" type="text" placeholder="yyyy-mm-dd" aria-label="Search"/>
         <h4>Facility Type</h4>
         <select size="1" class="form-control mr-sm-2" autocomplete="off" id="types" aria-label="Search">
+=======
+      <div class="container text-left">
+        <h1 class="display-3">Chicago Food Inspection Search</h1>
+        <h4>Inspection Date</h4>
+        <input id="date" class="inputcontrol form-control" type="text" placeholder="yyyy-mm-dd" aria-label="Search"/>
+        <h4>Facility Type</h4>
+        <select size="1" class="inputcontrol form-control" autocomplete="off" id="types" aria-label="Search">
+>>>>>>> new_master
             <option value="#"></option>
         </select>
         
         <h4>Inspection Result</h4>
+<<<<<<< HEAD
         <select size="1" class="form-control mr-sm-2" autocomplete="off" id="results" aria-label="Search">
             <option value="#"></option>
         </select>
@@ -72,10 +82,21 @@
           <h4 class="btn btn-primary btn-md" style="cursor:pointer" onclick="submit()">Search <i class="fa fa-search" aria-hidden="true"></i></h4>
         </div>
       </div>    
+=======
+        <select size="1" class="inputcontrol form-control" autocomplete="off" id="results" aria-label="Search">
+            <option value="#"></option>
+        </select>
+        <h4>Zip Code</h4>
+        <input id="zip" class="inputcontrol form-control" type="text" placeholder="Zip Code" aria-label="Search">
+        <div style="padding-top:50px">
+          <h4 class="btn btn-primary btn-md" style="cursor:pointer" onclick="submit()">Search <i class="fa fa-search" aria-hidden="true"></i></h4>
+        </div>
+      </div>
+>>>>>>> new_master
     </div>
       
     <div id="Text" class="tabcontent">
-      <div class="jumbotron container-fluid">
+      <div class="container-fluid">
         <div id="textout" class="row">
         </div>
       </div>   
@@ -92,7 +113,7 @@
 
 
     <div id="Map" class="tabcontent">
-      <div class="jumbotron" style="height:100%">
+      <div style="height:100%">
         <div id="map"></div>
       </div>   
     </div>

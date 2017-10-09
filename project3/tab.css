@@ -50,3 +50,7 @@ div.tab button.active {
 .tabinactive{
   display: none
 }
+
+.inputcontrol{
+  width: 25%;
+}
