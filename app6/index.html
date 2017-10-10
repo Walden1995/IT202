@@ -10,7 +10,8 @@
         google.charts.load('current', {'packages':['corechart']});
   
         // Set a callback to run when the Google Visualization API is loaded.
-        google.charts.setOnLoadCallback(getData());
+        google.charts.setOnLoadCallback(getData);
+        
         function getData(){
         $.get("https://data.cityofchicago.org/resource/tt4n-kn4t.json?$query=SELECT%20department,%20SUM(annual_salary)%20GROUP%20BY%20department", function(response){
           drawChart(response);
