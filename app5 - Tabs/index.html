@@ -7,14 +7,44 @@
     <meta name="author" content="">
     <link rel="icon" href = "https://github.com/fluidicon.png">
 
-    <title>IT202 - app5</title>
+    <title>IT202/app5-T</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="tab.min.css">
     <style>
-      section {
-        padding-top: 3.5em;
+      div.tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+      }
+
+      div.tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+      }
+
+      div.tab button:hover {
+        background-color: #ddd;
+      }
+
+      div.tab button.active {
+        background-color: #ccc;
+      }
+
+      .jumb{
+        padding-top:3.5em;
+      }
+
+      section,body{
+        height: calc(100% - 3.5em);
+        background-color: #ccc;
       }
     </style>
   </head>
@@ -22,7 +52,7 @@
   <body>
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">Tabs</a>
+      <a class="navbar-brand" href="#">app5 - Tabs</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -45,7 +75,7 @@
       </div>
     </nav>
     
-    <div class="tab">
+    <div class="tab jumb">
       <button id="Tab1Btn" class="tablinks active" onclick="openTab(event, 'Tab1')">Tab1</button>
       <button id="Tab2Btn" class="tablinks" onclick="openTab(event, 'Tab2')">Tab2</button>
       <button id="Tab3Btn" class="tablinks" onclick="openTab(event, 'Tab3')">Tab3</button>
