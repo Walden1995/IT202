@@ -3,45 +3,47 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href = "https://github.com/fluidicon.png">
     <script src="../jquery.min.js"></script>        
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      google.load('visualization', '1', {packages:['table']});
-
-      google.setOnLoadCallback(getData());
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+            
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(getData);
 
       function getData(){
       $.get("https://data.cityofchicago.org/resource/suj7-cg3j.json?$select=vehicle_make_model,COUNT(vehicle_make_model)&$group=vehicle_make_model", function(response){
+        console.log(response);
         drawChart(response);
       });
       }
         // Callback that creates and populates a data table,
         // instantiates the pie chart, passes in the data and
         // draws it.
-        var chart2;
-        var data2;
-        function drawChart(carData) {
+      function drawChart(carData) {
 
-          // Create the data table.
-          var data = new google.visualization.DataTable();
+        // Create the data table.
+        var data = new google.visualization.DataTable();
 
-          data.addColumn('string', 'Vehicle_Make_Model');
-          data.addColumn('number', 'Count');
-          $.each(carData,function(index,curr){
-            data.addRow([curr.vehicle_make_model, parseFloat(curr.COUNT_vehicle_make_model)]);
-          })
-          // Set chart options
-          var options = {'title':'City info',width: 500,height: 500};
+        data.addColumn('string', 'Vehicle_Make_Model');
+        data.addColumn('number', 'Count');
+        $.each(carData,function(index,curr){
+          data.addRow([curr.vehicle_make_model, parseFloat(curr.COUNT_vehicle_make_model)]);
+        })
+        // Set chart options
+        var options = {'title':'City info',width: 500,height: 500};
 
-          // Instantiate and draw our chart, passing in some options.
-          var chart = new google.visualization.PieChart(document.getElementById("chart_div"));
-          chart.draw(data, options);
-
-    }
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById("chart_div"));
+        chart.draw(data, options);
+      }
     </script>
+    
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href = "https://github.com/fluidicon.png">
+    
     <title>swalde3 app5</title>
 
     <!-- CSS -->
@@ -56,7 +58,7 @@
     </style>
   </head>
 
-  <body>
+  <body >
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <a class="navbar-brand" href="#">app5</a>
@@ -85,30 +87,13 @@
     </nav>
 
     <section class="container-fluid">
-      <div class="row">
-        <div id="chart_div"></div>        
-      </div>
+      <div id="chart_div"></div>        
     </section>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
+    <!-- ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-
     <script src="../popper.min.js"></script>
     <script src="../bootstrap4.min.js"></script>
     <script type="text/javascript" src="../jquery.min.js"></script>
-    
-    
-    <script type="text/javascript">
-     $(window).resize(function(){
-      var options = {
-        'title':'City info',
-        width: $(window).width(),
-    height: $(window).height()*0.75
-      }
-      chart2.draw(data2, options);
-  });
-    
-    </script>
   </body>
 </html>
