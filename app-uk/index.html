@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Info windows</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class = "panel panel-default">
+      <input type="text" id ="zip" placeholder="Chicago Zip"></input>
+      <button id = "submit">submit</button>
+    </div>
+    
+
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDF8nkorKQLn7OmJLuSIsMItMTJBCT5WUY"></script>
+    <script>
+
+      // This example displays a marker at the center of Australia.
+      // When the user clicks the marker, an info window opens.
+      
+      var zips;
+      $.get("https://data.cityofchicago.org/resource/unjd-c2ca.json",function(response){
+        zips = response;
+      });
+      
+
+      function initMap() {
+        var uluru = {lat: 41.8781, lng: -87.6298};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: uluru
+        });
+        
+        
+        var didindex = 0;
+        $.each(zips,function(index,curr){
+          if(curr.zip === $("#zip").val()){
+            didindex = 1;
+            console.log("Valid Zip");
+            $.get("https://data.cityofchicago.org/resource/cdmx-wzbz.json?zip_code=" + $("#zip").val() ,function(response){
+              plotdata(response,map);
+           });
+          }
+        });
+        
+        if(didindex === 0){
+          console.log("Invalid Zip");
+          alert("Zipcode Not from Chicago");
+        }
+      }
+      
+      
+      
+      function plotdata(datatoplot,gmap){
+        $.each(datatoplot,function(index,curr){
+          var newpos = {lat: curr.location.coordinates[1], lng: curr.location.coordinates[0]};
+          
+           var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">'+this.service_request_number+'</h1>'+
+            '<div id="bodyContent">'+
+            '<p><b>'+this.type_of_service_request +'</b> on'+this.what_type_of_surface_is_the_graffiti_on_ +
+            '@ '+this.street_address+'</p>'+
+            '<p>Service is'+ this.status +
+            '</p>'+
+            '</div>'+
+            '</div>';
+          
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          
+          
+          var marker = new google.maps.Marker({
+            position: newpos,
+            map: gmap,
+            title: this.service_request_number
+          });
+          
+          marker.addListener('click', function() {
+            infowindow.open(gmap, marker);
+          });
+
+        });
+        
+      }
+    
+    </script>
+
+    <script>
+          $("#submit").on("click",initMap);
+    </script>
+  </body>
+</html>

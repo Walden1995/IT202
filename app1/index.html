@@ -24,18 +24,12 @@
       background-color: lightgreen;
     }
     .open{
-      background-color: red;
+      background-color: pink;
     }
   </style>
   </head>
   <body>
     <h1>311 Grafitti Requests</h1>
-    <div class = "panel panel-default">
-      <input type="text" placeholder="zip" id ="zip"></input>
-      <button id = "submit">submit</button>
-    </div>
-    
-    <div id="map"></div></div>
     <div id="template" class="panel panel-default nodisp">
       <div id="title" class="panel-heading">Panel Header</div>
       <div class = "panel-body">
@@ -45,22 +39,21 @@
     </div>
         
     <script>
-    var str = "https://data.cityofchicago.org/resource/cdmx-wzbz.json?zip_code="
-    $("#submit").on("click",function(){
-      console.log($("#zip").val());
-      var call = str + $("#zip").val();
-      $.get(call,function(response){
+    var str = "https://data.cityofchicago.org/resource/cdmx-wzbz.json?"
+    $(document).ready(function(){
+      $.get(str,function(response){
         $.each(response , function(index,value,parsed){
            console.log(this);
            var node = $("#template").clone();
            node.find("#title").text(this.service_request_number);
            if(this.status == "Completed"){
              node.find("#title").attr("class","completed");
+           } else {
+             node.find("#title").attr("class","open");
            }
            node.find("#content").text(this.street_address);
            node.find("#content2").text(this.status);
            node.removeClass("nodisp");
-           
            $("body").append(node);
         });
         

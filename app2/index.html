@@ -1,112 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Info windows</title>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-  </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+
+    <title>Walden1995/IT202</title>
+    <link rel="icon" href = "https://github.com/fluidicon.png"/>
+    
+ <style>
+   .nodisp{
+     display:none;
+  }
+    .completed{
+      background-color: lightgreen;
+    }
+    .open{
+      background-color: red;
+    }
+  </style>
+  </head>
   <body>
+    <h1>311 Grafitti Requests</h1>
     <div class = "panel panel-default">
-      <input type="text" id ="zip" placeholder="Chicago Zip"></input>
+      <input type="text" placeholder="zip" id ="zip"></input>
       <button id = "submit">submit</button>
     </div>
     
-
-    <div id="map"></div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDF8nkorKQLn7OmJLuSIsMItMTJBCT5WUY"></script>
+    <div id="map"></div></div>
+    <div id="template" class="panel panel-default nodisp">
+      <div id="title" class="panel-heading">Panel Header</div>
+      <div class = "panel-body">
+        <p id="content">Panel Content</p>
+        <p id="content2">Panel Content</p>
+      </div>
+    </div>
+        
     <script>
-
-      // This example displays a marker at the center of Australia.
-      // When the user clicks the marker, an info window opens.
-      
-      var zips;
-      $.get("https://data.cityofchicago.org/resource/unjd-c2ca.json",function(response){
-        zips = response;
-      });
-      
-
-      function initMap() {
-        var uluru = {lat: 41.8781, lng: -87.6298};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 10,
-          center: uluru
+    var str = "https://data.cityofchicago.org/resource/cdmx-wzbz.json?zip_code="
+    $("#submit").on("click",function(){
+      console.log($("#zip").val());
+      var call = str + $("#zip").val();
+      $.get(call,function(response){
+        $.each(response , function(index,value,parsed){
+           console.log(this);
+           var node = $("#template").clone();
+           node.find("#title").text(this.service_request_number);
+           if(this.status == "Completed"){
+             node.find("#title").attr("class","completed");
+           } else {
+             node.find("#title").attr("class","open");
+           }
+           node.find("#content").text(this.street_address);
+           node.find("#content2").text(this.status);
+           node.removeClass("nodisp");
+           
+           $("body").append(node);
         });
         
-        
-        var didindex = 0;
-        $.each(zips,function(index,curr){
-          if(curr.zip === $("#zip").val()){
-            didindex = 1;
-            console.log("Valid Zip");
-            $.get("https://data.cityofchicago.org/resource/cdmx-wzbz.json?zip_code=" + $("#zip").val() ,function(response){
-              plotdata(response,map);
-           });
-          }
-        });
-        
-        if(didindex === 0){
-          console.log("Invalid Zip");
-          alert("Zipcode Not from Chicago");
-        }
-      }
+    });
       
+    });
       
-      
-      function plotdata(datatoplot,gmap){
-        $.each(datatoplot,function(index,curr){
-          var newpos = {lat: curr.location.coordinates[1], lng: curr.location.coordinates[0]};
-          
-           var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">'+this.service_request_number+'</h1>'+
-            '<div id="bodyContent">'+
-            '<p><b>'+this.type_of_service_request +'</b> on'+this.what_type_of_surface_is_the_graffiti_on_ +
-            '@ '+this.street_address+'</p>'+
-            '<p>Service is'+ this.status +
-            '</p>'+
-            '</div>'+
-            '</div>';
-          
-          var infowindow = new google.maps.InfoWindow({
-            content: contentString
-          });
-          
-          
-          var marker = new google.maps.Marker({
-            position: newpos,
-            map: gmap,
-            title: this.service_request_number
-          });
-          
-          marker.addListener('click', function() {
-            infowindow.open(gmap, marker);
-          });
-
-        });
-        
-      }
+    
     
     </script>
-
-    <script>
-          $("#submit").on("click",initMap);
-    </script>
   </body>
+  
+
 </html>
