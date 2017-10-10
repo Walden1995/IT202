@@ -9,7 +9,9 @@ h5 {
   line-height: 1.2857em;
   margin: 0;
 }
-
+.sample {
+  display: none;
+}
 .card {
   font-size: 1em;
   overflow: hidden;
