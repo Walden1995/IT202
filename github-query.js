@@ -7,7 +7,7 @@ jQuery.fn.loadRepoContent = function(username, repo) {
         var repos = data.data; // JSON Parsing
 
         $(repos).each(function() {
-            if (this.type == "dir") {
+            if (this.type == "dir" && this.name != ".vscode") {
                 
 							var node = $("#listitem").clone();
 							
