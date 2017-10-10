@@ -9,17 +9,15 @@
 
     <title>swalde3 app5</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="bootstrap4.min.css" rel="stylesheet">
-    <link href="jumbotron.css" rel="stylesheet">
-    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="tab.css">
+    <!-- CSS -->
+    <link href="../bootstrap4.min.css" rel="stylesheet">
+    <link href="card.css" rel="stylesheet">
   </head>
 
   <body>
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">home</a>
+      <a class="navbar-brand" href="#">app5</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -30,62 +28,71 @@
             <a class="nav-link" href="../">IT202</a>
           </li>
           <li class="nav-item">
-              <a id="Screen1Btn" class="nav-link" onclick="openTab(event, 'Screen1', 'Screen1Btn')">Screen1</a>
+            <a class="nav-link" href="https://Walden1995.github.io/">Walden1995</a>
           </li>
-          <li class="nav-item">
-              <a id="Screen2Btn" class="nav-link" onclick="openTab(event, 'Screen2', 'Screen2Btn')">Screen2</a>
-          </li>
-          <li class="nav-item">
-              <a id="Screen3Btn" class="nav-link" onclick="openTab(event, 'Screen3', 'Screen3Btn')">Screen3</a>
-          </li>
-
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" target="_blank" href="https://randomuser.me/">API Endpoint</a>
+              <a class="dropdown-item" target="_blank" href="https://bootsnipp.com/snippets/featured/bootstrap-4-card">Card Example</a>
               <a class="dropdown-item" target="_blank" href="https://github.com/Walden1995/IT202">Repository Link</a>
             </div>
           </li>
         </ul>
       </div>
     </nav>
-    
-    <div id="Screen1" class="tabcontent">
-        <div class="jumbotron">
-            <h4>Screen1</h4>
+
+    <div id="card" class="col-sm-6 col-md-4 col-lg-3 mt-4 sample">
+      <div class="card card-inverse card-info">
+          <img class="card-img-top" src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif">
+          <div class="card-block">
+              <figure class="profile profile-inline">
+                  <img id="profileavatar" src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif" class="profile-avatar" alt="">
+              </figure>
+              <h4 class="card-title">Tawshif Ahsan Khan</h4>
+              <div id="text1" class="card-text">
+                  Tawshif is a web designer living in Bangladesh.
+              </div>
+              <div id="text2" class="card-text">
+
+              </div>
           </div>
-    </div>
-      
-    <div id="Screen2" class="tabcontent">
-        <div class="jumbotron">
-            <h4>Screen2</h4>
-          </div>  
-    </div>
-      
-    <div id="Screen3" class="tabcontent">
-      <div class="jumbotron">
-        <h4>Screen3</h4>
       </div>
     </div>
 
 
+    <section id="Body">
+      <div class="row">
+
+      </div>
+    </section>
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="jquery.min.js"></script>
-    <script src="popper.min.js"></script>
-    <script src="bootstrap4.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="ie10-viewport-bug-workaround.js"></script>
-    
+    <script src="../jquery.min.js"></script>
+    <script src="../popper.min.js"></script>
+    <script src="../bootstrap4.min.js"></script>
     <script type="text/javascript">
+      var query;
       $(document).ready( function(){
-          $("#Screen1").show();
+        $.get("https://randomuser.me/api/?results=4",function(callback){
+          $.each(callback.results,function(i,v){
+            console.log(v);
+            var card = $("#card").clone();
+            card.removeClass("sample");
+            card.find(".card-title").text(v.name.first + " " + v.name.last);
+            card.find(".card-img-top").attr("src",v.picture.large);
+            card.find("#profileavatar").attr("src",v.picture.large);
+            card.find("#text1").text("Username: " + v.login.username);
+            card.find("#text2").text("email: " + v.email);
+            var body = $("#Body");
+            body.find(".row").append(card);
+          });
+        });
+   
+        
       });
-
-      function openTab(evt, tabName) {
-        $(".tabcontent").hide();
-        $('#' + tabName).show();
-      }
     </script>
   </body>
 </html>
