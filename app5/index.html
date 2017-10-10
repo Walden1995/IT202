@@ -6,12 +6,54 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href = "https://github.com/fluidicon.png">
+    <script src="../jquery.min.js"></script>        
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>    
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages:['table']});
 
+      google.setOnLoadCallback(getData());
+
+      function getData(){
+      $.get("https://data.cityofchicago.org/resource/suj7-cg3j.json?$select=vehicle_make_model,COUNT(vehicle_make_model)&$group=vehicle_make_model", function(response){
+        drawChart(response);
+      });
+      }
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        var chart2;
+        var data2;
+        function drawChart(carData) {
+
+          // Create the data table.
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('string', 'Vehicle_Make_Model');
+          data.addColumn('number', 'Count');
+          $.each(carData,function(index,curr){
+            data.addRow([curr.vehicle_make_model, parseFloat(curr.COUNT_vehicle_make_model)]);
+          })
+          // Set chart options
+          var options = {'title':'City info',width: 500,height: 500};
+
+          // Instantiate and draw our chart, passing in some options.
+          var chart = new google.visualization.PieChart(document.getElementById("chart_div"));
+          chart.draw(data, options);
+
+    }
+    </script>
     <title>swalde3 app5</title>
 
     <!-- CSS -->
     <link href="../bootstrap4.min.css" rel="stylesheet">
-    <link href="card.css" rel="stylesheet">
+
+    <style>
+    section{
+      padding-top:3.5em;
+      width:100%;
+      height: calc(100% - 3.5em);
+    }
+    </style>
   </head>
 
   <body>
@@ -33,8 +75,8 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" target="_blank" href="https://randomuser.me/">API Endpoint</a>
-              <a class="dropdown-item" target="_blank" href="https://bootsnipp.com/snippets/featured/bootstrap-4-card">Card Example</a>
+              <a class="dropdown-item" target="_blank" href="https://data.cityofchicago.org/resource/suj7-cg3j.json?$select=vehicle_make_model,COUNT(vehicle_make_model)&$group=vehicle_make_model">API Endpoint</a>
+              <a class="dropdown-item" target="_blank" href="https://developers.google.com/chart/interactive/docs/quick_start">Google Chart</a>
               <a class="dropdown-item" target="_blank" href="https://github.com/Walden1995/IT202">Repository Link</a>
             </div>
           </li>
@@ -42,57 +84,31 @@
       </div>
     </nav>
 
-    <div id="card" class="col-sm-6 col-md-4 col-lg-3 mt-4 sample">
-      <div class="card card-inverse card-info">
-          <img class="card-img-top" src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif">
-          <div class="card-block">
-              <figure class="profile profile-inline">
-                  <img id="profileavatar" src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif" class="profile-avatar" alt="">
-              </figure>
-              <h4 class="card-title">Tawshif Ahsan Khan</h4>
-              <div id="text1" class="card-text">
-                  Tawshif is a web designer living in Bangladesh.
-              </div>
-              <div id="text2" class="card-text">
-
-              </div>
-          </div>
-      </div>
-    </div>
-
-
-    <section id="Body">
+    <section class="container-fluid">
       <div class="row">
-
+        <div id="chart_div"></div>        
       </div>
     </section>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../jquery.min.js"></script>
+
     <script src="../popper.min.js"></script>
     <script src="../bootstrap4.min.js"></script>
+    <script type="text/javascript" src="../jquery.min.js"></script>
+    
+    
     <script type="text/javascript">
-      var query;
-      $(document).ready( function(){
-        $.get("https://randomuser.me/api/?results=4",function(callback){
-          $.each(callback.results,function(i,v){
-            console.log(v);
-            var card = $("#card").clone();
-            card.removeClass("sample");
-            card.find(".card-title").text(v.name.first + " " + v.name.last);
-            card.find(".card-img-top").attr("src",v.picture.large);
-            card.find("#profileavatar").attr("src",v.picture.large);
-            card.find("#text1").text("Username: " + v.login.username);
-            card.find("#text2").text("email: " + v.email);
-            var body = $("#Body");
-            body.find(".row").append(card);
-          });
-        });
-   
-        
-      });
+     $(window).resize(function(){
+      var options = {
+        'title':'City info',
+        width: $(window).width(),
+    height: $(window).height()*0.75
+      }
+      chart2.draw(data2, options);
+  });
+    
     </script>
   </body>
 </html>
