@@ -34,13 +34,13 @@ div.tab button.active {
 }
 
 /* Style the tab content */
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
-  height: calc(100% - 3.5rem);
-  border: 1px solid #ccc;
-  border-top: none;
-  border-bottom: none;
+body,html {
+  height: 100%
+}
+
+body{
+  background-color: #ccc;
+  padding-top: 3.5rem;
 }
 
 .tabactive{

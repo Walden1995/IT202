@@ -38,7 +38,7 @@ function submit(){
   var date = $('#date').val();
   var type = $('#types  :selected').text();
   var result = $('#results  :selected').text();
-  $(".tabcontent").hide();
+  $("section").hide();
   $(".tablinks").removeClass("active");
   $("#MapBtn").addClass("active");
   $("#Map").show();
@@ -82,14 +82,4 @@ function submit(){
     query = query + "results='"+result+"'";
   }
   getdata(query);
-}
-
-function openTab(evt, tabName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  $(".tabcontent").hide();
-  $(".tablinks").removeClass("active");
-
-  $('#' + tabName).show();
-  evt.currentTarget.className += " active";
 }
