@@ -1,3 +1,4 @@
+<!DOCTYPE = html>
 <html>
     <head>
       <!--Load the AJAX API-->
@@ -20,24 +21,42 @@
         // Callback that creates and populates a data table,
         // instantiates the pie chart, passes in the data and
         // draws it.
+        var chart2;
+        var data2;
         function drawChart(Citydata) {
   
           // Create the data table.
           var data = new google.visualization.DataTable();
           data.addColumn('string', 'Department');
-        data.addColumn('number', 'Salary');
+          data.addColumn('number', 'Salary');
           $.each(Citydata,function(index,curr){
             data.addRow([curr.department, parseFloat(curr.SUM_annual_salary)]);
           })
           // Set chart options
-          var options = {'title':'City info',
-                         'width':400,
-                         'height':300};
+          var options = {'title':'City Salary',
+                         'width':window.width,
+                         'height':window.height,
+                         sliceVisibilityThreshold: .01
+                         };
   
           // Instantiate and draw our chart, passing in some options.
           var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
           chart.draw(data, options);
+          chart2 = chart;
+          data2 = data;
         }
+
+        function resize(){
+          var options = {
+            'title':'City Salary',
+            'width': window.width,
+            'height': window.height,
+            slizeVisibilityThreshold: .01
+          }
+          chart2.draw(data2,options);
+        }
+
+        window.onresize = resize;
       </script>
 
       <meta name="description" content="">
@@ -48,12 +67,16 @@
       <!-- CSS -->
       <link href="../bootstrap4.min.css" rel="stylesheet">
       <style>
-        section{
+        .section{
           padding-top:3.5em;
           width:100%;
-          height: calc(100% - 3.5em);
+          height:100%;
         }
-      </style>
+        body,html{
+          height:100%;
+          width:100%
+        }
+        </style>
     </head>
   
     <body>
@@ -85,9 +108,9 @@
       </nav>
 
       <!--Div that will hold the pie chart-->
-      <section class="container-fluid">
+      <div class="section container-fluid">
         <div id="chart_div"></div>
-      </section>
+      </div>
 
     </body>
   </html>
