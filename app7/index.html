@@ -58,14 +58,14 @@
     
     <script type="text/javascript">
 
-      function getData(){
+      $(document).ready( function(){
         $.get("https://data.cityofchicago.org/resource/tt4n-kn4t.json?$query=SELECT%20DISTINCT%20department", function(response){
           $.each(response,function(i,v){
-            $("departments").append("<option>" + v.department + "</option>")
+            $("#departments").append("<option>" + v.department + "</option>")
           });
         
         });
-      }
+      })
     </script>
   </body>
 </html>
