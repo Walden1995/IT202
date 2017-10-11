@@ -13,7 +13,7 @@
         google.charts.setOnLoadCallback(getData);
 
         function getData(){
-        $.get("https://data.cityofchicago.org/resource/tt4n-kn4t.json?$query=SELECT%20department,%20SUM(annual_salary)%20GROUP%20BY%20department", function(response){
+        $.get("https://data.cityofchicago.org/resource/tt4n-kn4t.json?$query=SELECT%20department,%20SUM(annual_salary)%20GROUP%20BY%20department%20order%20by%20SUM_annual_salary%20DESC", function(response){
           drawChart(response);
         });
         }
