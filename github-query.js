@@ -4,7 +4,7 @@ jQuery.githubContent = function(username, repo, callback) {
 
 function loadContent() {
     $.get("folders.JSON",function(data){
-        $.each(data, function() {
+        $.each(data.data, function() {
             var node = $(".sample").clone();
             node.removeClass("sample");
             node.find("A").attr("href",(this.name) + "/");
