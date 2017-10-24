@@ -11,11 +11,13 @@
     {"name":"app7"},
     {"name":"app8"},
     {"name":"app9"},
+    {"name":"app10"},
     {"name":"gChart"},
     {"name":"lab1"},
     {"name":"lab2"},
     {"name":"project1"},
     {"name":"project2"},
-    {"name":"project3"}
+    {"name":"project3"},
+    {"name":"project4"}
   ]
 }

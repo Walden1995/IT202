@@ -1,0 +1,342 @@
+<html>
+    <head>
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href = "https://github.com/fluidicon.png">
+      
+      <title>IT202/app7</title>
+      <!-- CSS -->
+      <link href="../bootstrap4.min.css" rel="stylesheet">
+      <style>
+        .sample{
+          display:none;
+        }
+      
+        section{
+          padding-top:3.5em;
+          width:100%;
+          height: calc(100% - 3.5em);
+        }
+        
+        .gamepanel{
+          padding-top:3.5em;
+          width:100%;
+          height:3.5em;
+        }
+        
+        canvas {
+            width: 100%;
+            height: 100%;
+            border:1px ridge green;
+        }
+      </style>
+    </head>
+  
+    <body>
+  
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">project4</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="../">IT202</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://Walden1995.github.io/">Walden1995</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <a class="dropdown-item" target="_blank" href="https://github.com/Walden1995/IT202">Repository Link</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      
+      <div class="sample">
+        <image id="fighter" src="ship.png"></image>
+        <image id="enemy" src="enemy.png"></image>
+      </div>
+      <div class="gamepanel">
+        <h4 id ="lives">Lives</h1>
+        <h4 id ="score">Score</h4>
+      </div>
+      
+      <section>
+        <canvas width="480" height="270"></canvas>
+      </section>
+      <!--JavaScripts-->
+      <script src="../jquery.min.js"></script>
+      <script src="../popper.min.js"></script>
+      <script src="../bootstrap4.min.js"></script>    
+      <script type="text/javascript">
+      /*global $*/
+        var player;
+        var stars = new Array;
+        var enemies = new Array;
+        var allies = new Array;
+        var colors=["red","teal","white"];
+        
+        var score;
+        var life;
+
+        $(document).ready(function(){
+           gameInit();
+           for(var i = 0; i < 50; i++){
+             stars.push(new component(2, colors[Math.floor(Math.random()*3)], Math.floor(Math.random() * myGameArea.canvas.width), Math.floor(Math.random() * myGameArea.canvas.height), null) );
+             stars[i].speedY = 2;
+           }
+        });
+          
+        function gameInit(){
+            score = 0;
+            life = 5;
+            myGameArea.start();
+            player = new component(20, "black", myGameArea.canvas.width / 2, myGameArea.canvas.height - 20, $("#fighter").get(0));
+            for(var i = 0; i < 10; i++){
+              enemies.push(new component(10, "black", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * 1000)), $("#enemy").get(0)));
+              enemies[i].speedY = 2;
+            }
+            for(var i = 0; i < 5; i++){
+              allies.push(new component(5, "green", Math.floor(Math.random() * myGameArea.canvas.width ), -15, null) );
+              allies[i].speedY = 2;
+            }
+            
+            
+
+            updateGameArea();
+        };
+          
+        //$('canvas').css('height')
+        var myGameArea = {
+          canvas : $("canvas").get(0),
+          start : function() {
+              this.canvas.width = $('section').width();
+              this.canvas.height = $('section').height();
+              this.context = this.canvas.getContext("2d");
+              window.addEventListener('keydown', function (e) {
+                  myGameArea.keys = (myGameArea.keys || []);
+                  myGameArea.keys[e.keyCode] = (e.type == "keydown");
+              })
+              window.addEventListener('keyup', function (e) {
+                  myGameArea.keys[e.keyCode] = (e.type == "keydown");            
+              })
+          }, 
+          clear : function(){
+              this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+              this.context.fillStyle = 'black';
+              this.context.fillRect(0,0,this.canvas.width,this.canvas.height);
+          },
+          
+          gameover : function(){
+            this.context.fillStyle = 'red';
+            this.context.font = "75px Comic Sans MS";
+            this.context.textAlign = "center";
+            this.context.fillText("GAME OVER", this.canvas.width / 2, this.canvas.height / 2);
+            
+            this.context.font = "30px Comic Sans MS";
+            this.context.fillText("Press 'r' to restart", this.canvas.width / 2, this.canvas.height / 2 + 30);
+          }
+        }
+        
+        function component(radius, color, x, y, image) {
+          this.image = image;
+          this.gamearea = myGameArea;
+          this.radius = radius;
+          this.speedX = 0;
+          this.speedY = 0;    
+          this.x = x;
+          this.y = y;
+          this.count = 0;
+          this.maxTurn = 12;
+          this.isturn = false;
+          this.goRight = false;
+          
+          this.redraw = function(speedMultiplier) {
+            this.newPos(speedMultiplier);
+            this.update();
+          }
+
+          this.update = function() {
+            var ctx = myGameArea.context;
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
+            ctx.stroke();
+            ctx.fill();
+            if(this.image === null){
+              
+            } else {
+              ctx.drawImage(this.image,this.x-this.radius,this.y-this.radius,this.radius*2,this.radius*2);
+            }
+          }
+
+          this.newPos = function(sm) {
+            this.x += this.speedX * sm;
+            this.y += this.speedY * sm;        
+          }
+
+          this.bottomCollision = function() {
+            if(this.y >= myGameArea.canvas.height + radius){
+              this.reset();
+              if(component != null){
+                if(this.pieceCollision(component)){
+                  this.x = (this.x + radius) % myGameArea.canvas.width;
+                }
+              }
+              
+            }
+          }
+
+          this.reset = function(){
+            this.y = -radius;
+            this.x = Math.floor(Math.random() * myGameArea.canvas.width );
+          }
+
+          this.edgeCollision = function(){
+            if(this.x + radius >= myGameArea.canvas.width){
+              this.x = myGameArea.canvas.width - radius - 1;
+            }
+            if (this.x - radius <= 0){
+              this.x = radius + 1;
+            }
+          }
+          
+          this.enemyMovement = function(){
+            if(!this.isturn){
+              this.doturn(30);
+            } else {
+              this.inturn(15);
+            }
+          }
+          
+          this.doturn = function(frame){
+            this.count++;
+            if(this.count > frame){
+              this.isturn = true;
+              this.goRight = (Math.floor(Math.random() * 2) ) ? true : false;
+              this.speedX = (this.goRight) ? 1 : -1;
+              this.count = 0;
+            }
+          }
+          
+          this.inturn = function(frame){
+            this.count++
+            if(this.count > frame){
+              this.count = 0;
+              this.isturn = false;
+              this.speedX = 0;
+            }
+            
+          }
+
+          this.pieceCollision = function(component){
+            var dx = this.x - component.x;
+            var dy = this.y - component.y;
+            var distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < this.radius + component.radius) {
+              return true;
+            }
+              return false;
+          }
+        }
+        
+        function updateGameArea() {
+          player.speedX = 0;
+          player.speedY = 0;    
+          if (myGameArea.keys && myGameArea.keys[37]) {player.speedX = -2; }
+          if (myGameArea.keys && myGameArea.keys[39]) {player.speedX = 2; }
+          
+          $.each(allies,function(i,v){
+            if(player.pieceCollision(v)){
+              score++; 
+              v.reset();
+            }
+          });
+
+          $.each(enemies,function(i,v){
+            if(player.pieceCollision(v)){
+              life--; 
+              v.reset();
+            }
+          });
+          
+          if(life == -1){
+            myGameArea.gameover();
+            if(myGameArea.keys && myGameArea.keys[82]){
+              life = 5;
+              score = 0;
+              while (enemies.length) { enemies.pop(); }
+              $.each(allies,function(i,v){
+                v.reset();
+              });
+              for(var i = 0; i < 10; i++){
+                enemies.push(new component(10, "black", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * 1000)), $("#enemy").get(0)));
+                enemies[i].speedY = 2;
+              }
+              
+            }
+          } else {
+            $("#lives").text('lives: ' + life);
+            $("#score").text('score: ' + score);
+            
+            $.each(allies,function(i,v){
+              v.bottomCollision();
+              v.edgeCollision();
+            });
+
+            $.each(enemies,function(i,v){
+              v.enemyMovement();
+              v.bottomCollision();
+              v.edgeCollision();
+            });
+  
+            player.edgeCollision();
+            
+            myGameArea.clear();
+            if (myGameArea.keys && myGameArea.keys[16]) {
+              
+              $.each(stars, function(i,v){
+                v.bottomCollision(null);
+                v.redraw(12);
+              });
+              
+              player.redraw(10);
+              
+              $.each(enemies,function(i,v){
+                v.redraw(10);
+              });
+  
+              $.each(allies,function(i,v){
+                v.redraw(10);
+              });
+              
+            } else {
+              $.each(stars, function(i,v){
+                v.bottomCollision(null);
+                v.redraw(6);
+              });
+              
+              player.redraw(5);    
+              
+              $.each(enemies,function(i,v){
+                v.redraw(5);
+              }); 
+              
+              $.each(allies,function(i,v){
+                v.redraw(5);
+              });
+            }
+          }
+ 
+          requestAnimationFrame(updateGameArea);
+        }
+      </script>
+    </body>
+  </html>
+

@@ -4,7 +4,7 @@
       <meta name="author" content="">
       <link rel="icon" href = "https://github.com/fluidicon.png">
       
-      <title>IT202/app9</title>
+      <title>IT202/app11</title>
       <!-- CSS -->
       <link href="../bootstrap4.min.css" rel="stylesheet">
       <style>
@@ -20,12 +20,15 @@
             border:1px ridge green;
         }
       </style>
+      
+      <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+      
     </head>
   
     <body>
   
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">app9</a>
+        <a class="navbar-brand" href="#">app11</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -49,43 +52,43 @@
           </ul>
         </div>
       </nav>
-  
-      <!--Div that will hold the pie chart-->
-      <section class="container-fluid">
-        <h2 id="status">0, 0</h2>
-        <canvas width="500" height="250">Not supported</canvas>
+      
+      <section>
+        <form>
+          Please select your preferred contact method:
+          <div>
+            <input type="radio" id="contactChoice1"
+             name="contact" value="email" checked>
+            <label for="contactChoice1">Email</label>
+        
+            <input type="radio" id="contactChoice2"
+             name="contact" value="phone">
+            <label for="contactChoice2">Phone</label>
+        
+            <input type="radio" id="contactChoice3"
+             name="contact" value="mail">
+            <label for="contactChoice3">Mail</label>
+          </div>
+          <div>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
       </section>
-  
-  
       <!--JavaScripts-->
-      <script src="../ie10-viewport-bug-workaround.js"></script>
       <script src="../jquery.min.js"></script>
       <script src="../popper.min.js"></script>
       <script src="../bootstrap4.min.js"></script>    
       <script type="text/javascript">
-        $(document).ready(function(){
-          $('canvas').attr('height', $('canvas').css('height'));
-          $('canvas').attr('width', $('canvas').css('width'));
-          
-          function drawCircle(x,y,canvas){
-              var ctx= canvas.getContext("2d");
-              ctx.fillStyle = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-              ctx.beginPath();
-              var r = (Math.random() * 255 ) + 1;
-              ctx.arc(x, y, r,0, 2*Math.PI);
-              ctx.stroke();
-              ctx.fill();
-          }
-          
-          $("canvas").click(function(e){ 
-    
-            var x = e.pageX - this.offsetLeft;
-            var y = e.pageY - this.offsetTop;
-            drawCircle(x,y,this);
-            $('#status').html(x +', '+ y); 
-         });
-        })  
+        var db = new Dexie("MyDB");
+            db.version(1).stores({settings: "name,value,date"});
+            db.on("populate", function() {
+                db.settings.add({name: "lastAccessed", value: new Date()});
+                db.settings.add({name: "shareLocation", value: false, date: new Date()});
+                db.settings.add({name: "displayName", value: "default"});
+            });
+            db.open();
+            db.put(name: "lastAccessed", value: new Date());
       </script>
     </body>
   </html>
-  
+
