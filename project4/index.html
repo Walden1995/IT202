@@ -4,7 +4,7 @@
       <meta name="author" content="">
       <link rel="icon" href = "https://github.com/fluidicon.png">
       
-      <title>IT202/app7</title>
+      <title>IT202/project4</title>
       <!-- CSS -->
       <link href="../bootstrap4.min.css" rel="stylesheet">
       <style>
@@ -15,13 +15,7 @@
         section{
           padding-top:3.5em;
           width:100%;
-          height: calc(100% - 3.5em);
-        }
-        
-        .gamepanel{
-          padding-top:3.5em;
-          width:100%;
-          height:3.5em;
+          height: calc(100%);
         }
         
         canvas {
@@ -52,6 +46,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
               <div class="dropdown-menu" aria-labelledby="dropdown01">
                 <a class="dropdown-item" target="_blank" href="https://github.com/Walden1995/IT202">Repository Link</a>
+                <a class="dropdown-item" target="_blank" href="#"></a>
               </div>
             </li>
           </ul>
@@ -62,11 +57,6 @@
         <image id="fighter" src="ship.png"></image>
         <image id="enemy" src="enemy.png"></image>
       </div>
-      <div class="gamepanel">
-        <h4 id ="lives">Lives</h1>
-        <h4 id ="score">Score</h4>
-      </div>
-      
       <section>
         <canvas width="480" height="270"></canvas>
       </section>
@@ -95,7 +85,7 @@
           
         function gameInit(){
             score = 0;
-            life = 5;
+            life = 2;
             myGameArea.start();
             player = new component(20, "black", myGameArea.canvas.width / 2, myGameArea.canvas.height - 20, $("#fighter").get(0));
             for(var i = 0; i < 10; i++){
@@ -115,6 +105,7 @@
         //$('canvas').css('height')
         var myGameArea = {
           canvas : $("canvas").get(0),
+          
           start : function() {
               this.canvas.width = $('section').width();
               this.canvas.height = $('section').height();
@@ -126,7 +117,15 @@
               window.addEventListener('keyup', function (e) {
                   myGameArea.keys[e.keyCode] = (e.type == "keydown");            
               })
-          }, 
+          },
+          
+          updateUI : function(){
+            this.context.fillStyle = 'white';
+            this.context.font = "25px Comic Sans MS";
+            this.context.fillText("Score: " + score, 5, 25);
+            this.context.fillText("Remaining Lives: " + life, this.canvas.width - 225, 25);
+          },
+          
           clear : function(){
               this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
               this.context.fillStyle = 'black';
@@ -266,10 +265,10 @@
             }
           });
           
-          if(life == -1){
+          if(life < 0){
             myGameArea.gameover();
             if(myGameArea.keys && myGameArea.keys[82]){
-              life = 5;
+              life = 2;
               score = 0;
               while (enemies.length) { enemies.pop(); }
               $.each(allies,function(i,v){
@@ -331,6 +330,8 @@
               $.each(allies,function(i,v){
                 v.redraw(5);
               });
+              
+              myGameArea.updateUI();
             }
           }
  
