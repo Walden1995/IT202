@@ -480,21 +480,25 @@
           player.speedY = 0;    
           if (myGameArea.keys && (myGameArea.keys[37] || myGameArea.keys[65]) ) {player.speedX = -2; }
           if (myGameArea.keys && (myGameArea.keys[39] || myGameArea.keys[68]) ) {player.speedX = 2; }
-          if (myGameArea.keys && myGameArea.keys[33] && (currentframe % 10) == 0) {createBullet("LEFT",player.x - 15,player.y)}
-          if (myGameArea.keys && myGameArea.keys[34] && (currentframe % 10) == 0) {createBullet("RIGHT",player.x + 15,player.y)}
+          if (myGameArea.keys && (myGameArea.keys[33] || myGameArea.keys[74]) && (currentframe % 10) == 0) {createBullet("LEFT",player.x - 15,player.y)}
+          if (myGameArea.keys && (myGameArea.keys[34] || myGameArea.keys[75]) && (currentframe % 10) == 0) {createBullet("RIGHT",player.x + 15,player.y)}
           
           $.each(enemies,function(i,v){
             v.enemyMovement();
           });
 
           myGameArea.clear();
-
+          var isfast = false;
+          var isslow = false;
           if (myGameArea.keys && (myGameArea.keys[38] || myGameArea.keys[87]) ) {
             updateEntities(4);
+            isfast = true;
           }else
           if (myGameArea.keys && (myGameArea.keys[40] || myGameArea.keys[83]) ) {
+            isslow = true;            
             updateEntities(1);
           } else {
+            
             updateEntities(2);    
           }
 
@@ -502,7 +506,9 @@
 
           $.each(allies,function(i,v){
             if(player.pieceCollision(v)){
-              score += 10; 
+              score += 10;
+              if(isfast) score += 10;
+              if(isslow) score -= 5;
               v.reset();
             }
           });
