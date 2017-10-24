@@ -1,39 +1,37 @@
+<!DOCTYPE=html>
 <html>
-    <head>
-      <meta name="description" content="">
-      <meta name="author" content="">
-      <link rel="icon" href = "https://github.com/fluidicon.png">
+  <head>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href = "https://github.com/fluidicon.png">
+    
+    <title>IT202/project4</title>
+    <!-- CSS -->
+    <link href="../bootstrap4.min.css" rel="stylesheet">
+    <style>
+      .sample{
+        display:none;
+      }
+    
+      section{
+        padding-top:3.5em;
+        width:100%;
+        height: calc(100%);
+      }
       
-      <title>IT202/project4</title>
-      <!-- CSS -->
-      <link href="../bootstrap4.min.css" rel="stylesheet">
-      <style>
-        .sample{
-          display:none;
-        }
-      
-        section{
-          padding-top:3.5em;
-          width:100%;
-          height: calc(100%);
-        }
-        
-        canvas {
-            width: 100%;
-            height: 100%;
-            border:1px ridge green;
-        }
-        .hover-target:hover i 
-        {
-  		   color: #222 !important;
-        }
-        h1,h2,h3,h4,h5,h6
-        {
-  	      font-weight:700;
-          font-family:Montserrat,'Helvetica Neue',Helvetica,Arial,sans-serif;
-          text-transform:uppercase
-        }
-      
+      canvas {
+          width: 100%;
+          height: 100%;
+          border:1px ridge green;
+      }
+ 
+      h1,h2,h3,h4,h5,h6
+      {
+        font-weight:700;
+        font-family:Montserrat,'Helvetica Neue',Helvetica,Arial,sans-serif;
+        text-transform:uppercase
+      }
+    
       section h2.section-heading
       {
         font-size:40px;
@@ -62,34 +60,38 @@
       {
         color: black!important
       }
-      section{
-        padding-top:3.5em;
-        height: calc(100%-3.5em);
-      }
+
       body
       {
         overflow-x:hidden;
         font-family:'Roboto Slab','Helvetica Neue',Helvetica,Arial,sans-serif;
         background-color: grey;
       }
+
       p
       {
         line-height:1.75
       }
-     
-      .nav-link:hover
-      {
-        color:steelblue!important;
-        border-color:#e9ecef #e9ecef #ddd
+      
+      .modal-header {
+        border-bottom: none;
+      }
+
+      .modal-footer {
+        border-top: none;
+      }
+
+      .modal-content {
+        background-color: #343a40;
+        color: white;
       }
     </style>
-    </head>
-  
-    <body>
-  
-       <!-- Navigation -->
+  </head>
+  <body>
+
+        <!-- Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand js-scroll-trigger" href="#">IT202</a>
+      <a class="navbar-brand js-scroll-trigger" href="#">project4</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -100,14 +102,14 @@
               <a class="nav-link" href="../">IT202</a>              
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" onclick="openTab('Tab2')">Description</a>
+            <a href="#" class="nav-link" data-toggle="modal" data-target="#exampleModal">About</a>
           </li>
         </ul>
         <ul class="navbar-nav navbar-right">
           <li class="nav-item dropdown navbar-right">
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle nav-link" type="button" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border-color: none;">
-                About
+                Info
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
                 <a class="dropdown-item" target="_blank" href="https://github.com/Walden1995/IT202">Repository</a>
@@ -121,195 +123,274 @@
       </div>
     </nav>
       
-      <div class="sample">
-        <image id="fighter" src="ship.png"></image>
-        <image id="enemy" src="enemy.png"></image>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
       </div>
-      <section>
-        <canvas width="480" height="270"></canvas>
-      </section>
-      <!--JavaScripts-->
-      <script src="../jquery.min.js"></script>
-      <script src="../popper.min.js"></script>
-      <script src="../bootstrap4.min.js"></script>    
-      <script type="text/javascript">
-      /*global $*/
-        var player;
-        var stars = new Array;
-        var enemies = new Array;
-        var allies = new Array;
-        var colors=["red","teal","white"];
-        
-        var score;
-        var life;
+    </div>
+    
+    <div class="sample">
+      <image id="fighter" src="ship.png"></image>
+      <image id="enemy" src="enemy.png"></image>
+      <image id="ally" src="collectable.png"></image>
+    </div>
+    <section>
+      <canvas width="480" height="270"></canvas>
+    </section>
+    <!--JavaScripts-->
+    <script src="../jquery.min.js"></script>
+    <script src="../popper.min.js"></script>
+    <script src="../bootstrap4.min.js"></script>    
+    <script type="text/javascript">
+    /*global $*/
+      var player;
+      var stars = new Array;
+      var enemies = new Array;
+      var allies = new Array;
+      var colors=["red","teal","white"];
+      
+      var score;
+      var life;
 
-        $(document).ready(function(){
-           gameInit();
-           for(var i = 0; i < 50; i++){
-             stars.push(new component(2, colors[Math.floor(Math.random()*3)], Math.floor(Math.random() * myGameArea.canvas.width), Math.floor(Math.random() * myGameArea.canvas.height), null) );
-             stars[i].speedY = 2;
-           }
-        });
-          
-        function gameInit(){
-            score = 0;
-            life = 2;
-            myGameArea.start();
-            player = new component(20, "black", myGameArea.canvas.width / 2, myGameArea.canvas.height - 20, $("#fighter").get(0));
-            for(var i = 0; i < 10; i++){
-              enemies.push(new component(10, "black", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * myGameArea.canvas.height)), $("#enemy").get(0)));
-              enemies[i].speedY = 2;
-            }
-            for(var i = 0; i < 5; i++){
-              allies.push(new component(5, "green", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * myGameArea.canvas.height)), null) );
-              allies[i].speedY = 2;
-            }
-            updateGameArea();
-        };
-          
-        //$('canvas').css('height')
-        var myGameArea = {
-          canvas : $("canvas").get(0),
-          
-          start : function() {
-              this.canvas.width = $('section').width();
-              this.canvas.height = $('section').height();
-              this.context = this.canvas.getContext("2d");
-              window.addEventListener('keydown', function (e) {
-                  myGameArea.keys = (myGameArea.keys || []);
-                  myGameArea.keys[e.keyCode] = (e.type == "keydown");
-              })
-              window.addEventListener('keyup', function (e) {
-                  myGameArea.keys[e.keyCode] = (e.type == "keydown");            
-              })
-          },
-          
-          updateUI : function(){
-            this.context.fillStyle = 'white';
-            this.context.font = "25px Comic Sans MS";
-            this.context.fillText("Score: " + score, 5, 25);
-            this.context.fillText("Remaining Lives: " + life, this.canvas.width - 225, 25);
-          },
-          
-          clear : function(){
-              this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-              this.context.fillStyle = 'black';
-              this.context.fillRect(0,0,this.canvas.width,this.canvas.height);
-          },
-          
-          gameover : function(){
-            this.context.fillStyle = 'red';
-            this.context.font = "75px Comic Sans MS";
-            this.context.fillText("GAME OVER", this.canvas.width / 3, this.canvas.height / 2);
-            
-            this.context.font = "30px Comic Sans MS";
-            this.context.fillText("Press 'r' to restart", this.canvas.width / 3 + 75, this.canvas.height / 2 + 30);
+      $(document).ready(function(){
+          gameInit();
+          for(var i = 0; i < 50; i++){
+            stars.push(new component(2, colors[Math.floor(Math.random()*3)], Math.floor(Math.random() * myGameArea.canvas.width), Math.floor(Math.random() * myGameArea.canvas.height), null) );
+            stars[i].speedY = 2;
           }
+      });
+        
+      function gameInit(){
+          score = 0;
+          life = 2;
+          myGameArea.start();
+          player = new component(30, "black", myGameArea.canvas.width / 2, myGameArea.canvas.height - 30, $("#fighter").get(0));
+          for(var i = 0; i < 10; i++){
+            enemies.push(new component(20, "black", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * myGameArea.canvas.height)), $("#enemy").get(0)));
+            enemies[i].speedY = 4;
+          }
+          for(var i = 0; i < 5; i++){
+            allies.push(new component(10, "black", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * myGameArea.canvas.height)), $("#ally").get(0)) );
+            allies[i].speedY = 2;
+          }
+          updateGameArea();
+      };
+        
+      //$('canvas').css('height')
+      var myGameArea = {
+        canvas : $("canvas").get(0),
+        
+        start : function() {
+            this.canvas.width = $('section').width();
+            this.canvas.height = $('section').height();
+            this.context = this.canvas.getContext("2d");
+            window.addEventListener('keydown', function (e) {
+                myGameArea.keys = (myGameArea.keys || []);
+                myGameArea.keys[e.keyCode] = (e.type == "keydown");
+            })
+            window.addEventListener('keyup', function (e) {
+                myGameArea.keys[e.keyCode] = (e.type == "keydown");            
+            })
+        },
+        
+        beenhit : function(){
+          this.context.fillStyle = 'red';
+          this.context.font = "75px Comic Sans MS";
+          this.context.fillText("COLLISION", this.canvas.width / 3, this.canvas.height / 2);
+          
+          this.context.font = "30px Comic Sans MS";
+          this.context.fillText("Press 'c' to restart", this.canvas.width / 3 + 75, this.canvas.height / 2 + 30);
+        },
+
+        updateUI : function(){
+          this.context.fillStyle = 'white';
+          this.context.font = "25px Comic Sans MS";
+          this.context.fillText("Score: " + score, 5, 25);
+          this.context.fillText("Remaining Lives: " + life, this.canvas.width - 225, 25);
+        },
+        
+        clear : function(){
+            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.context.fillStyle = 'black';
+            this.context.fillRect(0,0,this.canvas.width,this.canvas.height);
+        },
+        
+        gameover : function(){
+          this.context.fillStyle = 'red';
+          this.context.font = "75px Comic Sans MS";
+          this.context.fillText("GAME OVER", this.canvas.width / 3, this.canvas.height / 2);
+          
+          this.context.font = "30px Comic Sans MS";
+          this.context.fillText("Press 'r' to restart", this.canvas.width / 3 + 75, this.canvas.height / 2 + 30);
         }
+      }
+      
+      function component(radius, color, x, y, image) {
+        this.image = image;
+        this.gamearea = myGameArea;
+        this.radius = radius;
+        this.speedX = 0;
+        this.speedY = 0;    
+        this.x = x;
+        this.y = y;
+        this.count = 0;
+        this.maxTurn = 12;
+        this.isturn = false;
+        this.goRight = false;
         
-        function component(radius, color, x, y, image) {
-          this.image = image;
-          this.gamearea = myGameArea;
-          this.radius = radius;
-          this.speedX = 0;
-          this.speedY = 0;    
-          this.x = x;
-          this.y = y;
-          this.count = 0;
-          this.maxTurn = 12;
-          this.isturn = false;
-          this.goRight = false;
-          
-          this.redraw = function(speedMultiplier) {
-            this.newPos(speedMultiplier);
-            this.update();
-          }
+        this.redraw = function(speedMultiplier) {
+          this.newPos(speedMultiplier);
+          this.update();
+        }
 
-          this.update = function() {
-            var ctx = myGameArea.context;
+        this.update = function() {
+          var ctx = myGameArea.context;
+          if(this.image === null){
             ctx.fillStyle = color;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
             ctx.stroke();
             ctx.fill();
-            if(this.image === null){
-              
-            } else {
-              ctx.drawImage(this.image,this.x-this.radius,this.y-this.radius,this.radius*2,this.radius*2);
-            }
+          } else {
+            ctx.drawImage(this.image,this.x-this.radius,this.y-this.radius,this.radius*2,this.radius*2);
           }
+        }
 
-          this.newPos = function(sm) {
-            this.x += this.speedX * sm;
-            this.y += this.speedY * sm;        
-          }
+        this.newPos = function(sm) {
+          this.x += this.speedX * sm;
+          this.y += this.speedY * sm;
+          this.bottomCollision();
+          this.edgeCollision();        
+        }
 
-          this.bottomCollision = function() {
-            if(this.y >= myGameArea.canvas.height + radius){
-              this.reset();
-              if(component != null){
-                if(this.pieceCollision(component)){
-                  this.x = (this.x + radius) % myGameArea.canvas.width;
-                }
-              }
-              
-            }
+        this.bottomCollision = function() {
+          if(this.y >= myGameArea.canvas.height + radius){
+            this.reset();
           }
+        }
 
-          this.reset = function(){
-            this.y = -radius;
-            this.x = Math.floor(Math.random() * myGameArea.canvas.width );
-          }
+        this.reset = function(){
+          this.y = -radius;
+          this.x = Math.floor(Math.random() * myGameArea.canvas.width );
+        }
 
-          this.edgeCollision = function(){
-            if(this.x + radius >= myGameArea.canvas.width){
-              this.x = myGameArea.canvas.width - radius - 1;
-            }
-            if (this.x - radius <= 0){
-              this.x = radius + 1;
-            }
+        this.edgeCollision = function(){
+          if(this.x + radius >= myGameArea.canvas.width){
+            this.x = myGameArea.canvas.width - radius - 1;
           }
-          
-          this.enemyMovement = function(){
-            if(!this.isturn){
-              this.doturn(30);
-            } else {
-              this.inturn(15);
-            }
-          }
-          
-          this.doturn = function(frame){
-            this.count++;
-            if(this.count > frame){
-              this.isturn = (Math.floor(Math.random() * 2)) ? true: false;
-              this.goRight = (Math.floor(Math.random() * 2) ) ? true : false;
-              if(this.isturn) this.speedX = (this.goRight) ? 1 : -1;
-              this.count = 0;
-            }
-          }
-          
-          this.inturn = function(frame){
-            this.count++
-            if(this.count > frame){
-              this.count = 0;
-              this.isturn = false;
-              this.speedX = 0;
-            }
-            
-          }
-
-          this.pieceCollision = function(component){
-            var dx = this.x - component.x;
-            var dy = this.y - component.y;
-            var distance = Math.sqrt(dx * dx + dy * dy);
-            if (distance < this.radius + component.radius) {
-              return true;
-            }
-              return false;
+          if (this.x - radius <= 0){
+            this.x = radius + 1;
           }
         }
         
-        function updateGameArea() {
+        this.enemyMovement = function(){
+          if(!this.isturn){
+            this.idle(30);
+          } else {
+            this.inturn(15);
+          }
+        }
+        
+        this.idle = function(frame){
+          this.count++;
+          if(this.count > frame){
+            this.isturn = (Math.floor(Math.random() * 2)) ? true: false;
+            this.goRight = (Math.floor(Math.random() * 2) ) ? true : false;
+            if(this.isturn) this.speedX = (this.goRight) ? 1 : -1;
+            this.count = 0;
+          }
+        }
+        
+        this.inturn = function(frame){
+          this.count++
+          if(this.count > frame){
+            this.count = 0;
+            this.isturn = false;
+            this.speedX = 0;
+          }
+          
+        }
+
+        this.pieceCollision = function(component){
+          var dx = this.x - component.x;
+          var dy = this.y - component.y;
+          var distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < this.radius + component.radius) {
+            return true;
+          }
+            return false;
+        }
+      }
+
+      function updateEntities(speed){
+        $.each(stars, function(i,v){
+          v.redraw(speed);
+        });
+        $.each(allies,function(i,v){
+          v.redraw(speed);
+        });
+        $.each(enemies,function(i,v){
+          v.redraw(speed);
+        });
+        player.redraw(speed);
+      }
+      
+      var beenhit = false;
+      var itemhit;
+
+      function updateGameArea() {
+        if(life < 0){
+          myGameArea.gameover();
+          if(myGameArea.keys && myGameArea.keys[82])
+          {
+            life = 2;
+            score = 0;
+            beenhit = false;
+            
+            while (allies.length) { allies.pop(); }
+            
+            for(var i = 0; i < 5; i++){
+              allies.push(new component(10, "black", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * myGameArea.canvas.height)), $("#ally").get(0)) );
+              allies[i].speedY = 2;
+            }
+            
+            while (enemies.length) { enemies.pop(); }
+            for(var i = 0; i < 10; i++){
+              enemies.push(new component(20, "black", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * 1000)), $("#enemy").get(0)));
+              enemies[i].speedY = 4;
+            }
+            
+          } 
+        }else
+        
+        if(beenhit === true){
+          myGameArea.beenhit();
+          if(myGameArea.keys && myGameArea.keys[67]){
+            beenhit = false;
+          }
+          while (enemies.length) { enemies.pop(); }
+          for(var i = 0; i < 10; i++){
+            enemies.push(new component(20, "black", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * 1000)), $("#enemy").get(0)));
+            enemies[i].speedY = 4;
+          }
+        } else  
+
+        {
           player.speedX = 0;
           player.speedY = 0;    
           if (myGameArea.keys && myGameArea.keys[37]) {player.speedX = -2; }
@@ -324,91 +405,33 @@
 
           $.each(enemies,function(i,v){
             if(player.pieceCollision(v)){
-              life--; 
-              v.reset();
+              life--;
+              beenhit=true;
+              itemhit = i;
             }
           });
-          
-          if(life < 0){
-            myGameArea.gameover();
-            if(myGameArea.keys && myGameArea.keys[82])
-            {
-              life = 2;
-              score = 0;
-              
-              while (allies.length) { allies.pop(); }
-              
-              for(var i = 0; i < 5; i++){
-                allies.push(new component(5, "green", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * myGameArea.canvas.height)), null) );
-                allies[i].speedY = 2;
-              }
-              
-              while (enemies.length) { enemies.pop(); }
-              for(var i = 0; i < 10; i++){
-                enemies.push(new component(10, "black", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * 1000)), $("#enemy").get(0)));
-                enemies[i].speedY = 2;
-              }
-              
-            }
+
+     
+          $.each(enemies,function(i,v){
+            v.enemyMovement();
+          });
+
+          myGameArea.clear();
+
+          if (myGameArea.keys && myGameArea.keys[38]) {
+            updateEntities(6);
+          }else
+          if (myGameArea.keys && myGameArea.keys[40]){
+            updateEntities(2);
           } else {
-            $("#lives").text('lives: ' + life);
-            $("#score").text('score: ' + score);
-            
-            $.each(allies,function(i,v){
-              v.bottomCollision();
-              v.edgeCollision();
-            });
-
-            $.each(enemies,function(i,v){
-              v.enemyMovement();
-              v.bottomCollision();
-              v.edgeCollision();
-            });
-  
-            player.edgeCollision();
-            
-            myGameArea.clear();
-            if (myGameArea.keys && myGameArea.keys[38]) {
-              
-              $.each(stars, function(i,v){
-                v.bottomCollision(null);
-                v.redraw(12);
-              });
-              
-              player.redraw(10);
-              
-              $.each(enemies,function(i,v){
-                v.redraw(10);
-              });
-  
-              $.each(allies,function(i,v){
-                v.redraw(10);
-              });
-              
-            } else {
-              $.each(stars, function(i,v){
-                v.bottomCollision(null);
-                v.redraw(6);
-              });
-              
-              player.redraw(5);    
-              
-              $.each(enemies,function(i,v){
-                v.redraw(5);
-              }); 
-              
-              $.each(allies,function(i,v){
-                v.redraw(5);
-              });
-              
-              
-            }
+            updateEntities(4);    
           }
-          
-          myGameArea.updateUI();
-          requestAnimationFrame(updateGameArea);
-        }
-      </script>
-    </body>
-  </html>
 
+          myGameArea.updateUI();
+        }
+        
+        requestAnimationFrame(updateGameArea);
+      }
+    </script>
+  </body>
+</html>
