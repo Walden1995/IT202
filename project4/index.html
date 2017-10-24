@@ -23,35 +23,103 @@
             height: 100%;
             border:1px ridge green;
         }
-      </style>
+        .hover-target:hover i 
+        {
+  		   color: #222 !important;
+        }
+        h1,h2,h3,h4,h5,h6
+        {
+  	      font-weight:700;
+          font-family:Montserrat,'Helvetica Neue',Helvetica,Arial,sans-serif;
+          text-transform:uppercase
+        }
+      
+      section h2.section-heading
+      {
+        font-size:40px;
+        margin-top:0;
+        margin-bottom:15px
+      }
+      section h3.section-subheading
+      {
+        font-size:16px;
+        font-weight:400;
+        font-style:italic;
+        margin-bottom:75px;
+        text-transform:none;
+        font-family:'Droid Serif','Helvetica Neue',Helvetica,Arial,sans-serif
+      }
+      .text-primary
+      {
+        color: steelblue!important
+      }
+      .text-secondary
+      {
+        color: white!important
+      }
+
+      .text-muted
+      {
+        color: black!important
+      }
+      section{
+        padding-top:3.5em;
+        height: calc(100%-3.5em);
+      }
+      body
+      {
+        overflow-x:hidden;
+        font-family:'Roboto Slab','Helvetica Neue',Helvetica,Arial,sans-serif;
+        background-color: grey;
+      }
+      p
+      {
+        line-height:1.75
+      }
+     
+      .nav-link:hover
+      {
+        color:steelblue!important;
+        border-color:#e9ecef #e9ecef #ddd
+      }
+    </style>
     </head>
   
     <body>
   
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">project4</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="../">IT202</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://Walden1995.github.io/">Walden1995</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" target="_blank" href="https://github.com/Walden1995/IT202">Repository Link</a>
-                <a class="dropdown-item" target="_blank" href="#"></a>
+       <!-- Navigation -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand js-scroll-trigger" href="#">IT202</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+              <a class="nav-link" href="../">IT202</a>              
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="openTab('Tab2')">Description</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-right">
+          <li class="nav-item dropdown navbar-right">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle nav-link" type="button" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border-color: none;">
+                About
+              </button>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
+                <a class="dropdown-item" target="_blank" href="https://github.com/Walden1995/IT202">Repository</a>
+                <div class="dropdown-divider"></div>
+                <h6 class="dropdown-header">Author Webpage</h6>
+                <a href="https://walden1995.github.io/" class="dropdown-item">Walden1995.github.io</a>
               </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
       
       <div class="sample">
         <image id="fighter" src="ship.png"></image>
@@ -89,16 +157,13 @@
             myGameArea.start();
             player = new component(20, "black", myGameArea.canvas.width / 2, myGameArea.canvas.height - 20, $("#fighter").get(0));
             for(var i = 0; i < 10; i++){
-              enemies.push(new component(10, "black", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * 1000)), $("#enemy").get(0)));
+              enemies.push(new component(10, "black", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * myGameArea.canvas.height)), $("#enemy").get(0)));
               enemies[i].speedY = 2;
             }
             for(var i = 0; i < 5; i++){
-              allies.push(new component(5, "green", Math.floor(Math.random() * myGameArea.canvas.width ), -15, null) );
+              allies.push(new component(5, "green", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * myGameArea.canvas.height)), null) );
               allies[i].speedY = 2;
             }
-            
-            
-
             updateGameArea();
         };
           
@@ -135,11 +200,10 @@
           gameover : function(){
             this.context.fillStyle = 'red';
             this.context.font = "75px Comic Sans MS";
-            this.context.textAlign = "center";
-            this.context.fillText("GAME OVER", this.canvas.width / 2, this.canvas.height / 2);
+            this.context.fillText("GAME OVER", this.canvas.width / 3, this.canvas.height / 2);
             
             this.context.font = "30px Comic Sans MS";
-            this.context.fillText("Press 'r' to restart", this.canvas.width / 2, this.canvas.height / 2 + 30);
+            this.context.fillText("Press 'r' to restart", this.canvas.width / 3 + 75, this.canvas.height / 2 + 30);
           }
         }
         
@@ -217,9 +281,9 @@
           this.doturn = function(frame){
             this.count++;
             if(this.count > frame){
-              this.isturn = true;
+              this.isturn = (Math.floor(Math.random() * 2)) ? true: false;
               this.goRight = (Math.floor(Math.random() * 2) ) ? true : false;
-              this.speedX = (this.goRight) ? 1 : -1;
+              if(this.isturn) this.speedX = (this.goRight) ? 1 : -1;
               this.count = 0;
             }
           }
@@ -267,13 +331,19 @@
           
           if(life < 0){
             myGameArea.gameover();
-            if(myGameArea.keys && myGameArea.keys[82]){
+            if(myGameArea.keys && myGameArea.keys[82])
+            {
               life = 2;
               score = 0;
+              
+              while (allies.length) { allies.pop(); }
+              
+              for(var i = 0; i < 5; i++){
+                allies.push(new component(5, "green", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * myGameArea.canvas.height)), null) );
+                allies[i].speedY = 2;
+              }
+              
               while (enemies.length) { enemies.pop(); }
-              $.each(allies,function(i,v){
-                v.reset();
-              });
               for(var i = 0; i < 10; i++){
                 enemies.push(new component(10, "black", Math.floor(Math.random() * myGameArea.canvas.width ), -15 - (Math.floor(Math.random() * 1000)), $("#enemy").get(0)));
                 enemies[i].speedY = 2;
@@ -298,7 +368,7 @@
             player.edgeCollision();
             
             myGameArea.clear();
-            if (myGameArea.keys && myGameArea.keys[16]) {
+            if (myGameArea.keys && myGameArea.keys[38]) {
               
               $.each(stars, function(i,v){
                 v.bottomCollision(null);
@@ -331,10 +401,11 @@
                 v.redraw(5);
               });
               
-              myGameArea.updateUI();
+              
             }
           }
- 
+          
+          myGameArea.updateUI();
           requestAnimationFrame(updateGameArea);
         }
       </script>
