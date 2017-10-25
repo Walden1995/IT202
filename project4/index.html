@@ -509,7 +509,7 @@
           if (myGameArea.keys && (myGameArea.keys[39] || myGameArea.keys[68]) ) {player.speedX = 2; }
           if (myGameArea.keys && (myGameArea.keys[33] || myGameArea.keys[74]) && (currentframe % 10) == 0) {createBullet("LEFT",player.x - 15,player.y)}
           if (myGameArea.keys && (myGameArea.keys[34] || myGameArea.keys[75]) && (currentframe % 10) == 0) {createBullet("RIGHT",player.x + 15,player.y)}
-          if ( myGameArea.x && myGameArea.y ) { player.speedX = (myGameArea.x >= player.x) ? 2 : -2; }
+          if ( myGameArea.x && myGameArea.y ) { if(myGameArea.x >= player.x){ player.speedX = 2; } else if(myGameArea.x < player.x){player.speedX = -2;} }
           
           $.each(enemies,function(i,v){
             v.enemyMovement();
