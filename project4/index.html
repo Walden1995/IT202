@@ -120,7 +120,7 @@
                 Info
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
-                <h6 class="dropdown-header">Version 1.12</h6>
+                <h6 class="dropdown-header">Version 1.0</h6>
                 <a class="dropdown-item" target="_blank" href="https://github.com/Walden1995/IT202">Repository</a>
                 <a class="dropdown-item" target="_blank" href="https://github.com/IT202/project4">Project Prompt</a>
                 <div class="dropdown-divider"></div>
@@ -187,7 +187,8 @@
       var life;
       var pause = true;
       var firstframe = true;
-      var click = false;
+      var x = 0;
+      var y = 0;
 
       $(document).ready(function(){
         gameInit();
@@ -200,13 +201,6 @@
         if (e.keyCode == 27) { 
           pause = !pause;
         }
-      });
-      $("canvas").on('click touchend', function(event){
-        event.preventDefault();
-        if(event.type == "click") {
-          if(!click) click = !click;
-          if(pause) pause = false;
-        }         
       });
 
       function gameInit(){
@@ -272,16 +266,6 @@
           })
           window.addEventListener('keyup', function (e) {
               myGameArea.keys[e.keyCode] = (e.type == "keydown");            
-          })
-          window.addEventListener('touchstart', function (e) {
-            e.preventDefault();
-            myGameArea.Orgx = e.touches[0].screenX;
-            myGameArea.Orgy = e.touches[0].screenY;
-          })
-          window.addEventListener('touchmove', function(e){
-            e.preventDefault();
-            myGameArea.x = e.touches[0].screenX;
-            myGameArea.y = e.touches[0].screenY;
           })
         },
         
@@ -477,9 +461,8 @@
         
         if(life < 0){
           myGameArea.gameover();
-          if( (myGameArea.keys && myGameArea.keys[82] ) || click )
+          if( myGameArea.keys && myGameArea.keys[82] )
           {
-            click = false;
             life = 2;
             score = 0;
             beenhit = false;
@@ -494,9 +477,8 @@
         
         if(beenhit === true){
           myGameArea.beenhit();
-          if( (myGameArea.keys && myGameArea.keys[67]) || click ){
+          if(myGameArea.keys && myGameArea.keys[67]){
             beenhit = false;
-            click = false;
             var CurrEnemy = enemies.length;
             while (enemies.length) { enemies.pop(); }
             createEnemies(CurrEnemy);
@@ -517,14 +499,6 @@
           if (myGameArea.keys && (myGameArea.keys[39] || myGameArea.keys[68]) ) {player.speedX = 2; }
           if (myGameArea.keys && (myGameArea.keys[33] || myGameArea.keys[74]) && (currentframe % 10) == 0) {createBullet("LEFT",player.x - 15,player.y)}
           if (myGameArea.keys && (myGameArea.keys[34] || myGameArea.keys[75]) && (currentframe % 10) == 0) {createBullet("RIGHT",player.x + 15,player.y)}
-          if ( myGameArea.Orgx && myGameArea.Orgy ) {
-            if(myGameArea.x >= myGameArea.Orgx){
-              player.SpeedX = 2;
-            }
-            if(myGameArea.x < myGameArea.Orgx){
-              player.SpeedX = -2;
-            }
-          }
           
           $.each(enemies,function(i,v){
             v.enemyMovement();
@@ -533,7 +507,7 @@
           myGameArea.clear();
           var isfast = false;
           var isslow = false;
-          if ( (myGameArea.keys && (myGameArea.keys[38] || myGameArea.keys[87])) || (myGameArea.y <= myGameArea.canvas.height/2) ) {
+          if (myGameArea.keys && (myGameArea.keys[38] || myGameArea.keys[87])) {
             updateEntities(4);
             isfast = true;
           }else
