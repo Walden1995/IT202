@@ -186,6 +186,7 @@
       var life;
       var pause = true;
       var firstframe = true;
+      var click = false;
 
       $(document).ready(function(){
         gameInit();
@@ -200,9 +201,10 @@
         }
       });
       $("canvas").on('click touchend', function(event){
-        if(event.type == "click") 
-        if(pause) pause = !pause;
-        if(!beenhit) beenhit = !beenhit;
+        if(event.type == "click") {
+          if(!click) click = !click;
+          if(pause) pause = false;
+        }         
       });
 
       function gameInit(){
@@ -467,8 +469,9 @@
         
         if(life < 0){
           myGameArea.gameover();
-          if(myGameArea.keys && myGameArea.keys[82])
+          if( (myGameArea.keys && myGameArea.keys[82] ) || click )
           {
+            click = false;
             life = 2;
             score = 0;
             beenhit = false;
@@ -483,13 +486,13 @@
         
         if(beenhit === true){
           myGameArea.beenhit();
-          if(myGameArea.keys && myGameArea.keys[67]){
+          if( (myGameArea.keys && myGameArea.keys[67]) || click ){
             beenhit = false;
+            click = false;
+            var CurrEnemy = enemies.length;
+            while (enemies.length) { enemies.pop(); }
+            createEnemies(CurrEnemy);
           }
-          if()
-          var CurrEnemy = enemies.length;
-          while (enemies.length) { enemies.pop(); }
-          createEnemies(CurrEnemy);
         } else  
 
         {
@@ -506,7 +509,7 @@
           if (myGameArea.keys && (myGameArea.keys[39] || myGameArea.keys[68]) ) {player.speedX = 2; }
           if (myGameArea.keys && (myGameArea.keys[33] || myGameArea.keys[74]) && (currentframe % 10) == 0) {createBullet("LEFT",player.x - 15,player.y)}
           if (myGameArea.keys && (myGameArea.keys[34] || myGameArea.keys[75]) && (currentframe % 10) == 0) {createBullet("RIGHT",player.x + 15,player.y)}
-          if ( myGameArea.x && myGameArea.y ) { player.speedX = (myGameArea.x > player.x) ? 2 : -2; }
+          if ( myGameArea.x && myGameArea.y ) { player.speedX = (myGameArea.x >= player.x) ? 2 : -2; }
           
           $.each(enemies,function(i,v){
             v.enemyMovement();
