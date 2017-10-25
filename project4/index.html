@@ -272,6 +272,12 @@
               myGameArea.keys[e.keyCode] = (e.type == "keydown");            
           })
           window.addEventListener('touchstart', function (e) {
+            e.preventDefault();
+            myGameArea.Orgx = e.touches[0].screenX;
+            myGameArea.Orgy = e.touches[0].screenY;
+          })
+          window.addEventListener('touchmove', function(e){
+            e.preventDefault();
             myGameArea.x = e.touches[0].screenX;
             myGameArea.y = e.touches[0].screenY;
           })
