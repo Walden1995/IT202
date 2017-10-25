@@ -200,7 +200,9 @@
         }
       });
       $("canvas").on('click touchend', function(event){
-        if(event.type == "click") pause = !pause;
+        if(event.type == "click") 
+        if(pause) pause = !pause;
+        if(!beenhit) beenhit = !beenhit;
       });
 
       function gameInit(){
@@ -484,6 +486,7 @@
           if(myGameArea.keys && myGameArea.keys[67]){
             beenhit = false;
           }
+          if()
           var CurrEnemy = enemies.length;
           while (enemies.length) { enemies.pop(); }
           createEnemies(CurrEnemy);
