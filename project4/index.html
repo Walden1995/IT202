@@ -137,19 +137,20 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">About Game</h5>
+            <h5 class="modal-title text-center" id="exampleModalLabel">About Game</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
+            <h4>Your Ship is the one centered at the bottom of the screen.</h4>
             <h4 class="text-center">Controls</h4>
-            <p class="text-center">Left Arrow, Right Arrow to move the ship at the bottom of the screen</p>
-            <p class="text-center">Up Arrown and Down Arrow to adjust speed</p>
-            <p class="text-center">Use Page Up and Page Down to fire left and right Laser Cannons</p>
-            <h4 class="text-center"><br>Objective</h4>
-            <p class="text-center">Avoid the ships flying towards you</p>
-            <p class="text-center">Collect the coins</p>
+            <p class="text-center">Left Arrow or A to move left, Right Arrow or D to move left.</p>
+            <p class="text-center">Use the Up Arrow or W key to increase velocity, or the Down Arrow and S key to decrease velocity.</p>
+            <p class="text-center">The faster you go the more the coins are worth, but the harder it is to avoid the enemies.</p>
+            <p class="text-center">You can use the J and K keys or the Page up and Page Down keys to fire the cannons.</p>
+            <p class="text-center">As you progress through the game, the difficulty will increase. But so to will the rewards!</p>
+            <p class="text-center">Be warned, the enemies are quite erratic. and will eventually crowd you in.</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -178,11 +179,13 @@
       var allies = new Array;
       var bullets = new Array;
       var BulletCount = 0;
-      var MaxBulletCount = 10;
+      var MaxBulletCount = 19;
       var colors=["orange","teal","white"];
       var beenhit = false;
       var score;
       var life;
+      var pause = true;
+      var firstframe = true;
 
       $(document).ready(function(){
         gameInit();
@@ -191,7 +194,15 @@
           stars[i].speedY = 2;
         }
       });
-        
+      $(document).keyup(function(e) {
+        if (e.keyCode == 27) { 
+          pause = !pause;
+        }
+      });
+      $("canvas").on('click touchend', function(event){
+        if(event.type == "click") pause = !pause;
+      });
+
       function gameInit(){
           score = 0;
           life = 2;
@@ -201,7 +212,7 @@
           createAllies(5);
           player.redraw(0);
           $.each(stars,function(i,v){
-            v.redraw(0)
+            v.redraw(1);
           });
           updateGameArea();
       };
@@ -241,30 +252,34 @@
           }
         }
       }
-        
+
       var myGameArea = {
         canvas : $("canvas").get(0),
         
         start : function() {
-            this.canvas.width = $('section').width();
-            this.canvas.height = $('section').height();
-            this.context = this.canvas.getContext("2d");
-            window.addEventListener('keydown', function (e) {
-                myGameArea.keys = (myGameArea.keys || []);
-                myGameArea.keys[e.keyCode] = (e.type == "keydown");
-            })
-            window.addEventListener('keyup', function (e) {
-                myGameArea.keys[e.keyCode] = (e.type == "keydown");            
-            })
+          this.canvas.width = $('section').width();
+          this.canvas.height = $('section').height();
+          this.context = this.canvas.getContext("2d");
+          window.addEventListener('keydown', function (e) {
+              myGameArea.keys = (myGameArea.keys || []);
+              myGameArea.keys[e.keyCode] = (e.type == "keydown");
+          })
+          window.addEventListener('keyup', function (e) {
+              myGameArea.keys[e.keyCode] = (e.type == "keydown");            
+          })
+          window.addEventListener('touchmove', function (e) {
+            myGameArea.x = e.touches[0].screenX;
+            myGameArea.y = e.touches[0].screenY;
+          })
         },
         
         pause : function(){
           this.context.fillStyle = 'blue';
           this.context.font = "75px Comic Sans MS";
-          this.context.fillText("PUASED", this.canvas.width / 3, this.canvas.height / 2);
+          this.context.fillText("PAUSED", this.canvas.width / 3 + parseInt(this.canvas.width * .05), this.canvas.height / 2);
           
           this.context.font = "30px Comic Sans MS";
-          this.context.fillText("Press 'p' to continue", this.canvas.width / 3 + 75, this.canvas.height / 2 + 30);
+          this.context.fillText("Press 'esc' to continue", this.canvas.width / 3 + parseInt(this.canvas.width * .045), this.canvas.height / 2 + 30);
         },
 
         beenhit : function(){
@@ -441,9 +456,13 @@
         player.redraw(speed);
       }
       
-      var timer = Math.floor(Math.random() * 250) + 150;
+      var timer = Math.floor(Math.random() * 250) + 350;
       var currentframe = 0;
       function updateGameArea() {
+        if(pause && firstframe != true){
+          myGameArea.pause();
+        } else
+        
         if(life < 0){
           myGameArea.gameover();
           if(myGameArea.keys && myGameArea.keys[82])
@@ -455,6 +474,8 @@
             createAllies(5);
             while (enemies.length) { enemies.pop(); }
             createEnemies(5);
+            while (bullets.length) { bullets.pop(); }
+            BulletCount = 0;
           } 
         }else
         
@@ -482,6 +503,7 @@
           if (myGameArea.keys && (myGameArea.keys[39] || myGameArea.keys[68]) ) {player.speedX = 2; }
           if (myGameArea.keys && (myGameArea.keys[33] || myGameArea.keys[74]) && (currentframe % 10) == 0) {createBullet("LEFT",player.x - 15,player.y)}
           if (myGameArea.keys && (myGameArea.keys[34] || myGameArea.keys[75]) && (currentframe % 10) == 0) {createBullet("RIGHT",player.x + 15,player.y)}
+          if ( myGameArea.x && myGameArea.y ) { player.speedX = (myGameArea.x > player.x) ? 2 : -2; }
           
           $.each(enemies,function(i,v){
             v.enemyMovement();
@@ -509,6 +531,8 @@
               score += 10;
               if(isfast) score += 10;
               if(isslow) score -= 5;
+
+              score += parseInt(.15 * enemies.length);
               v.reset();
             }
           });
@@ -520,7 +544,8 @@
             }
           });
         }
-        
+        if(firstframe) firstframe = !firstframe;
+
         requestAnimationFrame(updateGameArea);
       }
     </script>
