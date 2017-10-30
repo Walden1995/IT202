@@ -55,7 +55,7 @@
     }
     app.getForecast(key, label);
     app.selectedCities.push({key: key, label: label});
-    app.Cities();
+    app.saveSelectedCities();
     app.toggleAddDialog(false);
   });
   
@@ -334,4 +334,9 @@ app.saveSelectedCities = function() {
   }
 
   // TODO add service worker code here
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+             .register('./service-worker.js')
+             .then(function() { console.log('Service Worker Registered'); });
+  }
 })();
