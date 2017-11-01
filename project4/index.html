@@ -1,6 +1,7 @@
-<!DOCTYPE=html>
+<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href = "https://github.com/fluidicon.png">
@@ -61,8 +62,13 @@
         color: black!important
       }
 
+      html
+      {
+        height:100%;
+      }
       body
       {
+        height: 100%;
         overflow-x:hidden;
         font-family:'Roboto Slab','Helvetica Neue',Helvetica,Arial,sans-serif;
         background-color: grey;
@@ -161,11 +167,12 @@
     </div>
     
     <div class="sample">
-      <image id="fighter" src="ship.png"></image>
-      <image id="enemy" src="enemy.png"></image>
-      <image id="ally" src="collectable.png"></image>
+      <img id="fighter" src="ship.png" alt="fail">
+      <img id="enemy" src="enemy.png" alt="fail">
+      <img id="ally" src="collectable.png" alt="fail">
     </div>
     <section>
+      <h1 style="display:none;">hi</h1>
       <canvas width="480" height="270"></canvas>
     </section>
     <!--JavaScripts-->
