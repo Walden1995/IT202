@@ -1,67 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="google-signin-client_id" content="413002341273-mah6lb46fo5939bvjriduul07khf1h5v.apps.googleusercontent.com">
-    <script src="../jquery.min.js"></script>        
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href = "https://github.com/fluidicon.png">
-    
-    <title>IT202/app5-G</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="google-signin-client_id" content="413002341273-mah6lb46fo5939bvjriduul07khf1h5v.apps.googleusercontent.com">
+  <script src="../jquery.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-    <!-- CSS -->
-    <link href="../bootstrap4.min.css" rel="stylesheet">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="https://github.com/fluidicon.png">
 
-    <style>
-    section{
-      padding-top:3.5em;
-      width:100%;
+  <title>IT202/app15</title>
+
+  <!-- CSS -->
+  <link href="../bootstrap4.min.css" rel="stylesheet">
+
+  <style>
+    section {
+      padding-top: 3.5em;
+      width: 100%;
       height: calc(100% - 3.5em);
     }
-    </style>
-  </head>
+  </style>
+</head>
 
-  <body >
+<body>
 
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">app5-Gchart</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">app15</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="../">IT202</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://Walden1995.github.io/">Walden1995</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" target="_blank" href="https://data.cityofchicago.org/resource/suj7-cg3j.json?$select=vehicle_make_model,COUNT(vehicle_make_model)&$group=vehicle_make_model">API Endpoint</a>
-              <a class="dropdown-item" target="_blank" href="https://developers.google.com/chart/interactive/docs/quick_start">Google Chart</a>
-              <a class="dropdown-item" target="_blank" href="https://github.com/Walden1995/IT202">Repository Link</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="../">IT202</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://Walden1995.github.io/">Walden1995</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" target="_blank" href="https://developers.google.com/identity/sign-in/web/sign-in">Google Sign-In for Websites</a>
+            <a class="dropdown-item" target="_blank" href="https://github.com/Walden1995/IT202">Repository Link</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-    <section class="container-fluid">
-      <div class="g-signin2" data-onsuccess="onSignIn"></div>        
-    </section>
+  <section class="container-fluid">
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  </section>
 
-    <!-- ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="../popper.min.js"></script>
-    <script src="../bootstrap4.min.js"></script>
-    <script type="text/javascript" src="../jquery.min.js"></script>
-  </body>
+  <!-- ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="../popper.min.js"></script>
+  <script src="../bootstrap4.min.js"></script>
+  <script type="text/javascript" src="../jquery.min.js"></script>
+  <script>
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+  </script>
+</body>
+
 </html>
