@@ -15,6 +15,7 @@
     {"name":"app11"},
     {"name":"app12"},
     {"name":"app13"},
+    {"name":"app14"},
     {"name":"lab1"},
     {"name":"lab2"},
     {"name":"project1"},
@@ -24,6 +25,6 @@
     {"name":"project5"},
     {"name":"project6"},
     {"name":"project7"},
-    {"name":"BigProject"}
+    {"name":"TheBigOne"}
   ]
 }
