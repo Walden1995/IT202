@@ -1,251 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <!-- Bootstrap core CSS -->
-    <link href="bootstrap4.min.css" rel="stylesheet">
-    <link href="font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>IT202</title>
-    <link rel="icon" href = "https://github.com/fluidicon.png"/>
-    
-    <!-- Custom styles for this template -->
-    <style>
-      .hover-target:hover i 
-      {
-		   color: #222 !important;
-      }
-      h1,h2,h3,h4,h5,h6
-      {
-	      font-weight:700;
-        font-family:Montserrat,'Helvetica Neue',Helvetica,Arial,sans-serif;
-        text-transform:uppercase
-      }
-      section
-      {
-        padding:100px 0
-      }
-      section h2.section-heading
-      {
-        font-size:40px;
-        margin-top:0;
-        margin-bottom:15px
-      }
-      section h3.section-subheading
-      {
-        font-size:16px;
-        font-weight:400;
-        font-style:italic;
-        margin-bottom:75px;
-        text-transform:none;
-        font-family:'Droid Serif','Helvetica Neue',Helvetica,Arial,sans-serif
-      }
-      .text-primary
-      {
-        color: steelblue!important
-      }
-      .text-secondary
-      {
-        color: white!important
-      }
+  <!-- Bootstrap core CSS -->
+  <link href="bootstrap4.min.css" rel="stylesheet">
+  <link href="font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
-      .text-muted
-      {
-        color: black!important
-      }
-      section{
-        padding-top:3.5em;
-        height: calc(100%-3.5em);
-      }
-      body
-      {
-        overflow-x:hidden;
-        font-family:'Roboto Slab','Helvetica Neue',Helvetica,Arial,sans-serif;
-        background-color: grey;
-      }
-      p
-      {
-        line-height:1.75
-      }
-      
-      footer
-      {
-        position: absolute;
-        bottom:0;
-        width: 100%;
-        text-align:center;
-        border-width:3px;
-        border-color:black;
-      }
+  <title>IT202</title>
+  <link rel="icon" href="https://github.com/fluidicon.png" />
 
-      span.copyright
-      {
-        font-size:90%;
-        line-height:40px;
-        font-family:Montserrat,'Helvetica Neue',Helvetica,Arial,sans-serif;
-        text-transform:uppercase;
-      }
+  <!-- Custom styles for this template -->
+  <style>
+    body,
+    html,
+    section {
+      height: 100%
+    }
 
-      ul.social-buttons li a:active,ul.social-buttons li a:focus,ul.social-buttons li a:hover
-      {
-        background-color:steelblue!important
-      }
-      ul.social-buttons
-      {
-        margin-bottom:0
-      }
-      ul.social-buttons li a
-      {
-        font-size:20px;
-        line-height:40px;
-        display:block;
-        width:40px;
-        height:40px;
-        -webkit-transition:all .3s;
-        -moz-transition:all .3s;
-        transition:all .3s;
-        color:#fff;
-        border-radius:100%;
-        outline:0;
-        background-color:#222
-      }
-      .sample{
-        display:none;
-      }
-      .nav-link:hover
-      {
-        color:steelblue!important;
-        border-color:#e9ecef #e9ecef #ddd
-      }
-    </style>
-  </head>
+    .dropdown-menu,
+    footer {
+      background-color: #343a40
+    }
 
-  <body id="page-top">
+    .dropdown-menu {
+      border-style: solid;
+      border-width: 2px;
+      border-color: grey
+    }
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand js-scroll-trigger" href="#">IT202</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    .dropdown-item {
+      color: #4682b4
+    }
+
+    .dropdown-item:focus,
+    .dropdown-item:hover {
+      color: #fff;
+      background-color: #343a40
+    }
+
+
+    .hover-target:hover i {
+      color: #222 !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 700;
+      font-family: Montserrat, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      text-transform: uppercase
+    }
+
+    .text-primary {
+      color: steelblue!important
+    }
+
+    .text-secondary {
+      color: white!important
+    }
+
+    .text-muted {
+      color: black!important
+    }
+
+    section {
+      padding-top: 3.5em;
+      padding-bottom:3.5em;
+    }
+
+    section h2.section-heading {
+      font-size: 40px;
+      margin-top: 0;
+      margin-bottom: 15px
+    }
+
+    section h3.section-subheading {
+      font-size: 16px;
+      font-weight: 400;
+      font-style: italic;
+      margin-bottom: 75px;
+      text-transform: none;
+      font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif
+    }
+
+    body {
+      overflow-x: hidden;
+      font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: #505050;
+    }
+
+    p {
+      line-height: 1.75
+    }
+
+    footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      border-width: 3px;
+      border-color: black;
+    }
+
+    ul.social-buttons li a:active,
+    ul.social-buttons li a:focus,
+    ul.social-buttons li a:hover {
+      background-color: steelblue!important
+    }
+
+    ul.social-buttons {
+      margin-bottom: 0
+    }
+
+    ul.social-buttons li a {
+      font-size: 20px;
+      line-height: 40px;
+      display: block;
+      width: 40px;
+      height: 40px;
+      -webkit-transition: all .3s;
+      -moz-transition: all .3s;
+      transition: all .3s;
+      color: #fff;
+      border-radius: 100%;
+      outline: 0;
+      background-color: #222
+    }
+
+    .sample {
+      display: none;
+    }
+
+    .nav-link:hover {
+      color: steelblue!important;
+      border-color: #e9ecef #e9ecef #ddd
+    }
+  </style>
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand js-scroll-trigger" href="#">IT202</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-              <a class="nav-link" href="#" onclick="openTab('Tab1')">Pages</a>              
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="openTab('Tab2')">Description</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav navbar-right">
-          <li class="nav-item dropdown navbar-right">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle nav-link" type="button" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border-color: none;">
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="openTab('Tab1')">Pages</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="openTab('Tab2')">Description</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav navbar-right">
+        <li class="nav-item dropdown navbar-right">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle nav-link" type="button" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border-color: none;">
                 About
               </button>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
-                <a class="dropdown-item" target="_blank" href="https://github.com/Walden1995/IT202">Repository</a>
-                <div class="dropdown-divider"></div>
-                <h6 class="dropdown-header">Author Webpage</h6>
-                <a href="https://walden1995.github.io/" class="dropdown-item">Walden1995.github.io</a>
-              </div>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
+              <a class="dropdown-item" target="_blank" href="https://github.com/Walden1995/IT202">Repository</a>
+              <div class="dropdown-divider"></div>
+              <h6 class="dropdown-header">Author Webpage</h6>
+              <a href="https://walden1995.github.io/" class="dropdown-item">Walden1995.github.io</a>
             </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    
-    <!-- Services -->
-    <section id="Tab1">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <h2 class="section-heading">Assignments</h2>
-            <h3 class="section-subheading text-muted">Classwork for IT202 Fall '17</h3>
           </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Services -->
+  <section id="Tab1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2 class="section-heading">Assignments</h2>
+          <h3 class="section-subheading text-muted">Classwork for IT202 Fall '17</h3>
         </div>
-        <div class="row text-center">
-          <ul id="list" class = "list-inline col-sm-12 col-md-12 col-xs-12">
-            <li id="listitem" class = "sample list-inline-item col-md-2 col-sm-4 col-xs-4">
-                <a id="link" href="https://github.com/Walden1995/IT202">
+      </div>
+      <div class="row text-center">
+        <ul id="list" class="list-inline col-sm-12 col-md-12 col-xs-12">
+          <li id="listitem" class="sample list-inline-item col-md-2 col-sm-4 col-xs-4">
+            <a id="link" href="https://github.com/Walden1995/IT202">
                   <span class="fa-stack fa-4x hover-target">
                     <i class="fa fa-circle fa-stack-2x text-primary"></i>
                     <strong id="title" class="fa-stack-1x calendar-text text-secondary" style="font-size: 35%">Git Repo</strong>
                   </span>
                 </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="Tab2">
+    <div class="container">
+      <div class="text-center">
+        <h1>This website was created during the fall semester of 2017, while Walden was in attendence of the IT202 class. The bubbles on the previous pages each transition you to the index page of each homework or project that was prompted for during the
+          class. They are not in chronological order, rather they are grouped by type.</h1>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="fixed-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline social-buttons">
+            <li class="list-inline-item">
+              <a href="https://www.facebook.com/stephen.walden.100" target="_blank">
+                  <i class="fa fa-facebook"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://www.linkedin.com/in/stephen-3-walden" target="_blank">
+                  <i class="fa fa-linkedin"></i>
+                </a>
             </li>
           </ul>
         </div>
       </div>
-    </section>
+    </div>
+  </footer>
 
-    <section id="Tab2">
-      <div class="container">
-        <div class="text-center">
-            <h1>This website was created during the fall semester of 2017, while Walden was in attendence of the IT202 class. The bubbles on the previous pages each transition you to the index page of each homework or project that was prompted for during the class. They are not in chronological order, rather they are grouped by type.</h1>
-        </div>  
-      </div>
-    </section>
+  <!-- Core JavaScript -->
+  <script src="jquery.min.js" type="text/javascript"></script>
+  <script src="popper.min.js"></script>
+  <script src="bootstrap4.min.js"></script>
+  <script src="jquery.easing.min.js"></script>
+  <script src="folderscript.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      loadContent();
+    });
 
- 
-    <!-- Footer -->
-    <footer class="fixed-bottom">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <span class="copyright">Copyright&copy; Stephen Walden 2017</span>
-          </div>
-          <div class="col-md-4">
-            <ul class="list-inline social-buttons">
-              <li class="list-inline-item">
-                <a href="https://www.facebook.com/stephen.walden.100" target="_blank">
-                  <i class="fa fa-facebook"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="www.linkedin.com/in/stephen-3-walden" target="_blank">
-                  <i class="fa fa-linkedin"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
 
-    <!-- Core JavaScript -->
-    <script src="jquery.min.js" type="text/javascript"></script>
-    <script src="popper.min.js"></script>
-    <script src="bootstrap4.min.js"></script>
-    <script src="jquery.easing.min.js"></script>
-    <script src="folderscript.js" type="text/javascript"></script>
-    <script type="text/javascript">
-      $(document).ready( function(){
-        loadContent();
-      });
+    var query;
+    $(document).ready(function() {
+      $("section").hide();
+      $("#Tab1").show();
+    });
 
-      
-      var query;
-      $(document).ready( function(){
-        $("section").hide();
-        $("#Tab1").show();
-      });
+    function openTab(tabName) {
+      $("section").hide();
+      $('#' + tabName).show();
+    }
+  </script>
 
-     function openTab(tabName) {
-        $("section").hide();
-        $('#' + tabName).show();
-     }
-    </script>
-
-  </body>
+</body>
 
 </html>
