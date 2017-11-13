@@ -37,26 +37,56 @@
     </header>
 
     <aside class="mdc-temporary-drawer mdc-typography">
-        <nav class="mdc-temporary-drawer__drawer">
-            <div class="mdc-temporary-drawer__toolbar-spacer"></div>
-            <nav id="icon-with-text-demo" class="mdc-temporary-drawer__content mdc-list">
-                <button class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple" onclick="openTab(event, 'page1')">page1</button>
-                <button class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple" onclick="openTab(event, 'page2')">page2</button>
-                <button class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple" onclick="openTab(event, 'page3')">page3</button>
-            </nav>
+      <nav class="mdc-temporary-drawer__drawer">
+        <header class="mdc-temporary-drawer__header">
+          <div class="mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary">
+            Header here
+          </div>
+        </header>
+        <nav class="mdc-temporary-drawer__content mdc-list-group">
+          <div id="icon-with-text-demo" class="mdc-list">
+            <a class="mdc-list-item mdc-temporary-drawer--selected" href="#" data-mdc-tabindex-handled="true" tabindex="-1">
+              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">inbox</i>Inbox
+            </a>
+            <a class="mdc-list-item" href="#" data-mdc-tabindex-handled="true" tabindex="-1">
+              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">star</i>Star
+            </a>
+            <a class="mdc-list-item" href="#" data-mdc-tabindex-handled="true" tabindex="-1">
+              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">send</i>Sent Mail
+            </a>
+            <a class="mdc-list-item" href="#" data-mdc-tabindex-handled="true" tabindex="-1">
+              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">drafts</i>Drafts
+            </a>
+          </div>
+
+          <hr class="mdc-list-divider">
+
+          <div class="mdc-list">
+            <a class="mdc-list-item" href="#" data-mdc-tabindex-handled="true" tabindex="-1">
+              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">email</i>All Mail
+            </a>
+            <a class="mdc-list-item" href="#" data-mdc-tabindex-handled="true" tabindex="-1">
+              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">delete</i>Trash
+            </a>
+            <a class="mdc-list-item" href="#" data-mdc-tabindex-handled="true" tabindex="-1">
+              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">report</i>Spam
+            </a>
+          </div>
         </nav>
+      </nav>
     </aside>
 
+
     <main id="page1">
-        <h1 class="mdc-typography--display1">Page1</h1>
+        <h1 class="mdc-typography--display1">Audio/Radio information</h1>
     </main>
 
     <main id="page2" class="sample">
-        <h1 class="mdc-typography--display1">Page2</h1>
+        <h1 class="mdc-typography--display1">Geological information</h1>
     </main>
 
     <main id="page3" class="sample">
-        <h1 class="mdc-typography--display1">Page3</h1>
+        <h1 class="mdc-typography--display1">Weather information</h1>
     </main>
 
 
