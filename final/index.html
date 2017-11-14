@@ -26,12 +26,13 @@
 
     #meter {
       width: 150px;
-      height: 200px;
+      height: 150px;
       position: absolute;
       top: 150px;
       left: 45%;
       text-align: center;
       border:3px;
+      border-style:solid;
       border-color:#616161;
     }
   </style>
@@ -89,7 +90,7 @@
     <h1 class="mdc-typography--display1">Audio / Radio information</h1>
     <!-- The canvas that will be used to render the input level -->
     <h2 class="mdc-typography--display1" id="audioinformation"></h2>
-    <canvas id="meter" width="150" height="200"></canvas>
+    <canvas id="meter" width="150" height="150"></canvas>
 
   </main>
 
@@ -179,12 +180,12 @@
 
             //console.log(Math.round(average + 40));
 
-            canvasContext.clearRect(0, 0, 150, 200);
+            canvasContext.clearRect(0, 0, 150, 150);
             canvasContext.fillStyle = '#BadA55';
-            canvasContext.fillRect(0, 200 - average, 150, 200);
+            canvasContext.fillRect(0, 150 - average, 150, 150);
             canvasContext.fillStyle = '#262626';
             canvasContext.font = "48px impact";
-            canvasContext.fillText(average.toFixed(2), -2, 200);
+            canvasContext.fillText(average.toFixed(2), -2, 150);
 
           } // end fn stream
         },
