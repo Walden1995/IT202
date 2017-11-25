@@ -25,15 +25,13 @@
     }
 
     #meter {
-      width: 150px;
+      border-top: -50px;
+      width: 194px;
       height: 150px;
-      position: absolute;
-      top: 150px;
-      left: 45%;
       text-align: center;
-      border:3px;
-      border-style:solid;
-      border-color:#616161;
+      border: 3px;
+      border-style: solid;
+      border-color: #616161;
     }
   </style>
 </head>
@@ -67,30 +65,38 @@
               <i class="material-icons">wb_sunny</i><i class="material-icons">wb_cloudy</i>Weather Info
             </a>
         </div>
-
-        <hr class="mdc-list-divider">
-
-        <div class="mdc-list">
-          <a class="mdc-list-item" href="#" data-mdc-tabindex-handled="true" tabindex="-1">
-              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">email</i>All Mail
-            </a>
-          <a class="mdc-list-item" href="#" data-mdc-tabindex-handled="true" tabindex="-1">
-              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">delete</i>Trash
-            </a>
-          <a class="mdc-list-item" href="#" data-mdc-tabindex-handled="true" tabindex="-1">
-              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">report</i>Spam
-            </a>
-        </div>
       </nav>
     </nav>
   </aside>
 
 
   <main id="page1">
+    <div class="mdc-grid-list">
+      <ul class="mdc-grid-list__tiles">
+        <li class="mdc-grid-tile">
+          <div id="meterholder" class="mdc-grid-tile__primary">
+            <h2 class="mdc-typography--display1" id="audioinformation"></h2>
+            <canvas id="meter" width="150" height="150"></canvas>
+
+          </div>
+          <span class="mdc-grid-tile__secondary">
+        <span class="mdc-grid-tile__title">Title</span>
+          </span>
+        </li>
+        <li class="mdc-grid-tile">
+          <div class="mdc-grid-tile__primary">
+            <p>network type is <b id="networkType">not available</b>.</p>
+            <p>actual type is <b id="effectiveNetworkType">not available</b>.</p>
+            <p>downlink speed <b id="downlinkMax">not available</b>.</p>
+          </div>
+          <span class="mdc-grid-tile__secondary">
+        <span class="mdc-grid-tile__title">Title</span>
+          </span>
+        </li>
+      </ul>
+    </div>
     <h1 class="mdc-typography--display1">Audio / Radio information</h1>
     <!-- The canvas that will be used to render the input level -->
-    <h2 class="mdc-typography--display1" id="audioinformation"></h2>
-    <canvas id="meter" width="150" height="150"></canvas>
 
   </main>
 
@@ -126,12 +132,28 @@
     $(document).ready(function() {
       $("main").hide();
       $("#page1").show();
+      var info = getConnection();
+      if (info) {
+        info.addEventListener('change', updateNetworkInfo);
+        updateNetworkInfo(info);
+      }
     });
 
     function openTab(evt, tabName) {
       $("main").hide();
       $('#' + tabName).show();
       drawer.open = !drawer.open;
+    }
+
+    function getConnection() {
+      return navigator.connection || navigator.mozConnection ||
+        navigator.webkitConnection || navigator.msConnection;
+    }
+
+    function updateNetworkInfo(info) {
+      document.getElementById('networkType').innerHTML = info.type;
+      document.getElementById('effectiveNetworkType').innerHTML = info.effectiveType;
+      document.getElementById('downlinkMax').innerHTML = info.downlinkMax;
     }
   </script>
 
