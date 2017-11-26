@@ -24,6 +24,10 @@
       display: none;
     }
 
+    .hide {
+      display: none;
+    }
+
     #meter {
       border-top: -50px;
       width: 194px;
@@ -62,7 +66,7 @@
               <i class="material-icons">location_on</i><i class="material-icons">track_changes</i>Accelerometer-Geolocation
             </a>
           <a class="mdc-list-item" href="#" data-mdc-tabindex-handled="true" tabindex="-1" onclick="openTab(event, 'page3')">
-              <i class="material-icons">wb_sunny</i><i class="material-icons">wb_cloudy</i>Weather Info
+              <i class="material-icons">wb_sunny</i><i class="material-icons">wb_cloudy</i>NASA Info
             </a>
         </div>
       </nav>
@@ -77,10 +81,9 @@
           <div id="meterholder" class="mdc-grid-tile__primary">
             <h2 class="mdc-typography--display1" id="audioinformation"></h2>
             <canvas id="meter" width="150" height="150"></canvas>
-
           </div>
           <span class="mdc-grid-tile__secondary">
-        <span class="mdc-grid-tile__title">Title</span>
+        <span class="mdc-grid-tile__title">Audio</span>
           </span>
         </li>
         <li class="mdc-grid-tile">
@@ -90,27 +93,117 @@
             <p>downlink speed <b id="downlinkMax">not available</b>.</p>
           </div>
           <span class="mdc-grid-tile__secondary">
-        <span class="mdc-grid-tile__title">Title</span>
+        <span class="mdc-grid-tile__title">Network</span>
           </span>
         </li>
       </ul>
     </div>
-    <h1 class="mdc-typography--display1">Audio / Radio information</h1>
-    <!-- The canvas that will be used to render the input level -->
-
   </main>
 
   <main id="page2" class="sample">
-    <h1 class="mdc-typography--display1">Geological information</h1>
+    <div class="mdc-grid-list">
+      <ul class="mdc-grid-list__tiles">
+        <li class="mdc-grid-tile">
+          <div class="mdc-grid-tile__primary">
+            <p id="demo"></p>
+          </div>
+          <span class="mdc-grid-tile__secondary">
+        <span class="mdc-grid-tile__title">Position Info</span>
+          </span>
+        </li>
+        <li class="mdc-grid-tile">
+
+          <div class="mdc-grid-tile__primary">
+            <p id="accnotav">Not available</p>
+            <table class="table table-striped table-bordered hide">
+              <tr>
+                <td>Tilt Left/Right [gamma]</td>
+                <td id="doTiltLR"></td>
+              </tr>
+              <tr>
+                <td>Tilt Front/Back [beta]</td>
+                <td id="doTiltFB"></td>
+              </tr>
+              <tr>
+                <td>Direction [alpha]</td>
+                <td id="doDirection"></td>
+              </tr>
+            </table>
+          </div>
+          <span class="mdc-grid-tile__secondary">
+        <span class="mdc-grid-tile__title">Accelerometer</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+
+
+
   </main>
 
   <main id="page3" class="sample">
-    <h1 class="mdc-typography--display1">Weather information</h1>
+    <h1 class="mdc-typography--display1">City Location: <b id="city">unknown</b></b></h1>
+    <div style="height:100%">
+      <div id="map"></div>
+    </div> 
   </main>
 
 
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
   <script src="../jquery.min.js"></script>
+
+  <script>
+    var x = document.getElementById("demo");
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(spos, showError);
+        navigator.geolocation.watchPosition(showPosition);
+      }
+      else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+
+    function spos(position) {
+      console.log(position.coords);
+      x.innerHTML = "Accuracy: " + position.coords.accuracy +
+        "<br> Latitude: " + position.coords.latitude.toPrecision(10) +
+        "<br>Longitude: " + position.coords.longitude.toPrecision(10);
+      if (position.coords.altitudeAccuracy) x.innerHTML += "<br>Altitude Accuracy: " + position.coords.altitudeAccuracy;
+      if (position.coords.altitude) x.innerHTML += "<br>Altitude: " + position.coords.altitude;
+      if (position.coords.heading) x.innerHTML += "<br>Heading: " + position.coords.heading;
+      if (position.coords.speed) x.innerHTML += "<br>Speed: " + position.coords.speed;
+    }
+
+    function showPosition(position) {
+      x.innerHTML = "Accuracy: " + position.coords.accuracy +
+        "<br> Latitude: " + position.coords.toPrecision(10) +
+        "<br>Longitude: " + position.coords.toPrecision(10);
+      if (position.coords.altitudeAccuracy) x.innerHTML += "<br>Altitude Accuracy: " + position.coords.altitudeAccuracy;
+      if (position.coords.altitude) x.innerHTML += "<br>Altitude: " + position.coords.altitude;
+      if (position.coords.heading) x.innerHTML += "<br>Heading: " + position.coords.heading;
+      if (position.coords.speed) x.innerHTML += "<br>Speed: " + position.coords.speed;
+    }
+
+    function showError(error) {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          x.innerHTML = "User denied the request for Geolocation."
+          break;
+        case error.POSITION_UNAVAILABLE:
+          x.innerHTML = "Location information is unavailable."
+          break;
+        case error.TIMEOUT:
+          x.innerHTML = "The request to get user location timed out."
+          break;
+        case error.UNKNOWN_ERROR:
+          x.innerHTML = "An unknown error occurred."
+          break;
+      }
+    }
+  </script>
   <script>
     window.mdc.autoInit();
 
@@ -127,7 +220,6 @@
       console.log('Received MDCPersistentDrawer:close');
     });
   </script>
-
   <script>
     $(document).ready(function() {
       $("main").hide();
@@ -137,6 +229,7 @@
         info.addEventListener('change', updateNetworkInfo);
         updateNetworkInfo(info);
       }
+      getLocation();
     });
 
     function openTab(evt, tabName) {
@@ -156,7 +249,6 @@
       document.getElementById('downlinkMax').innerHTML = info.downlinkMax;
     }
   </script>
-
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
@@ -164,7 +256,6 @@
         .then(function() { console.log("Service Worker Registered"); });
     }
   </script>
-
   <script>
     navigator.getUserMedia = navigator.getUserMedia ||
       navigator.webkitGetUserMedia ||
@@ -217,6 +308,29 @@
     }
     else {
       console.log("getUserMedia not supported");
+    }
+  </script>
+  <script>
+    if ('DeviceOrientationEvent' in window) {
+      window.addEventListener('deviceorientation', deviceOrientationHandler, false);
+    }
+    else {
+      document.getElementById('logoContainer').innerText = 'Device Orientation API not supported.';
+    }
+
+    function deviceOrientationHandler(eventData) {
+      var tiltLR = eventData.gamma;
+      var tiltFB = eventData.beta;
+      var dir = eventData.alpha;
+      if (Math.round(tiltLR) !== 0 && Math.round(tiltFB) !== 0 && Math.round(dir) !== 0) {
+        $("table").removeClass("hide");
+        $("#accnotav").addClass("hide");
+      }
+      document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
+      document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
+      document.getElementById("doDirection").innerHTML = Math.round(dir);
+
+      var logo = document.getElementById("imgLogo");
     }
   </script>
 </body>
