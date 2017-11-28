@@ -37,6 +37,11 @@
       border-style: solid;
       border-color: #616161;
     }
+
+    #Map {
+      height: 100%;
+      width: 100%
+    }
   </style>
 </head>
 
@@ -65,7 +70,7 @@
           <a class="mdc-list-item" href="#" data-mdc-tabindex-handled="true" tabindex="-1" onclick="openTab(event, 'page2')">
               <i class="material-icons">location_on</i><i class="material-icons">track_changes</i>Accelerometer-Geolocation
             </a>
-          <a class="mdc-list-item" href="#" data-mdc-tabindex-handled="true" tabindex="-1" onclick="openTab(event, 'page3')">
+          <a class="mdc-list-item" href="#" data-mdc-tabindex-handled="true" tabindex="-1" onclick="openTab2(event, 'page3')">
               <i class="material-icons">wb_sunny</i><i class="material-icons">wb_cloudy</i>NASA Info
             </a>
         </div>
@@ -136,30 +141,34 @@
         </li>
       </ul>
     </div>
-
-
-
-
   </main>
 
   <main id="page3" class="sample">
-    <h1 class="mdc-typography--display1">City Location: <b id="city">unknown</b></b></h1>
+    <p id="city"></p>
+    <p>NASA Landfall Info</p>
     <div style="height:100%">
-      <div id="map"></div>
-    </div> 
+      <div id="Map"></div>
+    </div>
   </main>
-
 
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
   <script src="../jquery.min.js"></script>
 
+
+  <script src="./map.js"></script>
+
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvA7R3YhKLXMrFHlDUJBr9nEBV9rFtXOE&callback=initMap"></script>
+
   <script>
     var x = document.getElementById("demo");
+    var lat;
+    var long;
 
     function getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(spos, showError);
-        navigator.geolocation.watchPosition(showPosition);
+        navigator.geolocation.watchPosition(spos);
       }
       else {
         x.innerHTML = "Geolocation is not supported by this browser.";
@@ -171,16 +180,8 @@
       x.innerHTML = "Accuracy: " + position.coords.accuracy +
         "<br> Latitude: " + position.coords.latitude.toPrecision(10) +
         "<br>Longitude: " + position.coords.longitude.toPrecision(10);
-      if (position.coords.altitudeAccuracy) x.innerHTML += "<br>Altitude Accuracy: " + position.coords.altitudeAccuracy;
-      if (position.coords.altitude) x.innerHTML += "<br>Altitude: " + position.coords.altitude;
-      if (position.coords.heading) x.innerHTML += "<br>Heading: " + position.coords.heading;
-      if (position.coords.speed) x.innerHTML += "<br>Speed: " + position.coords.speed;
-    }
-
-    function showPosition(position) {
-      x.innerHTML = "Accuracy: " + position.coords.accuracy +
-        "<br> Latitude: " + position.coords.toPrecision(10) +
-        "<br>Longitude: " + position.coords.toPrecision(10);
+      lat = position.coords.latitude;
+      long = position.coords.longitude;
       if (position.coords.altitudeAccuracy) x.innerHTML += "<br>Altitude Accuracy: " + position.coords.altitudeAccuracy;
       if (position.coords.altitude) x.innerHTML += "<br>Altitude: " + position.coords.altitude;
       if (position.coords.heading) x.innerHTML += "<br>Heading: " + position.coords.heading;
@@ -232,10 +233,39 @@
       getLocation();
     });
 
+    var geokey = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
+    var apiKey = "&key=AIzaSyCYOeQV5sa8CrIgPLTuKLqooA8q1i3Y-SM"
+
+    function getCityInfo() {
+      console.log(lat);
+      console.log(long);
+      var geoSend = geokey + lat + "," + long + apiKey;
+      $.get(geoSend, function(response) {
+        console.log(response.results[0].address_components[3].long_name);
+        $("#city").text(response.results[0].address_components[3].long_name);
+      })
+    }
+
+
     function openTab(evt, tabName) {
       $("main").hide();
       $('#' + tabName).show();
       drawer.open = !drawer.open;
+    }
+
+    function openTab1(evt, tabName) {
+      $("main").hide();
+      $('#' + tabName).show();
+      drawer.open = !drawer.open;
+    }
+
+    function openTab2(evt, tabName) {
+      $("main").hide();
+      $('#' + tabName).show();
+      drawer.open = !drawer.open;
+      getCityInfo();
+      //"https://data.nasa.gov/resource/y77d-th95.json?$where=within_circle(geolocation,%20" + lat + ",%20" + long + ",%20160934)", lat, long
+      initMap();
     }
 
     function getConnection() {
