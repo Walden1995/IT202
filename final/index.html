@@ -146,9 +146,7 @@
   <main id="page3" class="sample">
     <p id="city"></p>
     <p>NASA Landfall Info</p>
-    <div style="height:100%">
-      <div id="Map"></div>
-    </div>
+    <div id="Map" style="display: block; height:250px; width:250px;"></div>
   </main>
 
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
@@ -265,7 +263,7 @@
       drawer.open = !drawer.open;
       getCityInfo();
       //"https://data.nasa.gov/resource/y77d-th95.json?$where=within_circle(geolocation,%20" + lat + ",%20" + long + ",%20160934)", lat, long
-      initMap();
+      plotNasa("https://data.nasa.gov/resource/y77d-th95.json?$where=within_circle(geolocation,%20" + lat + ",%20" + long + ",%20160934)", lat, long);
     }
 
     function getConnection() {
