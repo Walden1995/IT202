@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://github.com/fluidicon.png">
+
+    <title>IT202/project4</title>
+    <!-- CSS -->
+    <link href="../bootstrap4.min.css" rel="stylesheet">
+    <style>
+        .sample {
+            display: none;
+        }
+
+        section {
+            padding-top: 3.5em;
+            width: 100%;
+            height: calc(100%);
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            border: 1px ridge green;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 700;
+            font-family: Montserrat, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            text-transform: uppercase
+        }
+
+        section h2.section-heading {
+            font-size: 40px;
+            margin-top: 0;
+            margin-bottom: 15px
+        }
+
+        section h3.section-subheading {
+            font-size: 16px;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 75px;
+            text-transform: none;
+            font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif
+        }
+
+        .text-primary {
+            color: steelblue!important
+        }
+
+        .text-secondary {
+            color: white!important
+        }
+
+        .text-muted {
+            color: black!important
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            overflow-x: hidden;
+            font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: grey;
+        }
+
+        p {
+            line-height: 1.75
+        }
+
+        .modal-header {
+            border-bottom: none;
+        }
+
+        .modal-footer {
+            border-top: none;
+        }
+
+        .modal-content {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .dropdown-menu {
+            background-color: #343a40;
+            border: 1px #777 solid;
+        }
+
+        .dropdown-menu a {
+            color: white;
+        }
+
+        .dropdown-item:focus,
+        .dropdown-item:hover {
+            color: black!important;
+            background-color: grey!important;
+        }
+
+        .card {
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .card:hover .card-img-top {
+            background-color: #2b496c;
+            transform: translateY(0);
+            opacity: 100;
+        }
+
+        .card-img-top {
+            top: 0;
+            transform: translateY(-250px);
+            transition: all .3s ease-in-out;
+            opacity: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand js-scroll-trigger" href="#">project4</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../">IT202</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-toggle="modal" data-target="#exampleModal">About</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item dropdown navbar-right">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle nav-link" type="button" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border-color: none;">
+                Info
+              </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
+                            <h6 class="dropdown-header">Version 2.0</h6>
+                            <a class="dropdown-item" target="_blank" href="https://github.com/Walden1995/IT202">Repository</a>
+                            <a class="dropdown-item" target="_blank" href="https://developers.google.com/web/fundamentals/codelabs/push-notifications/">The Prompt</a>
+                            <a class="dropdown-item" target="_blank" href="https://web-push-book.gauntface.com/chapter-06/01-non-standards-browsers/">other browsers</a>
+                            <a class="dropdown-item" target="_blank" href="https://github.com/web-push-libs/">web-push-libs</a>
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">Author Webpage</h6>
+                            <a href="https://walden1995.github.io/" class="dropdown-item">Walden1995.github.io</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <section class="container-fluid">
+        <div class="row">
+            <div class="container col-sm-4">
+                <div class="card mb-3">
+                    <img class="card-img-top" src="./pushnote.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">Push success!</h4>
+                        <p class="card-text">This was a screensnippet that I took directly following my first successful notification push.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container col-sm-4">
+                <div class="card mb-3">
+                    <img class="card-img-top" src="./push.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">Sister Site Pushing</h4>
+                        <p class="card-text">This was while I was figuring out how to use the code-lab's sister site to push a message back to my homebrew server.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container col-sm-4">
+                <div class="card mb-3">
+                    <img class="card-img-top" src="./pushfinal.JPG" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">Success!</h4>
+                        <p class="card-text">I adjusted the final part so the notification would actually appear with the modified text from the sister site.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--JavaScripts-->
+    <script src="../jquery.min.js"></script>
+    <script src="../popper.min.js"></script>
+    <script src="../bootstrap4.min.js"></script>
+</body>
+
+</html>
